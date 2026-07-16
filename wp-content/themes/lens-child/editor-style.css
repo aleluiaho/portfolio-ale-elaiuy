@@ -1,0 +1,6 @@
+/* Reset the background images the Lens theme injects into the TinyMCE editor */
+html,
+body {
+    background-image: none !important;
+    background-color: #fff !important;
+}

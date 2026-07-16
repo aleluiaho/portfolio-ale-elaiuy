@@ -1,0 +1,102 @@
+/*-----------------------------------------------*\
+              THEME OPTIONS STYLING
+\*-----------------------------------------------*/
+/*-----------------------------------------------*\
+            THEME SPECIFIC - LENS
+\*-----------------------------------------------*/
+#lens_gallery.no-image #pixgallery,
+#portfolio_gallery.no-image #pixgallery
+{
+    min-height: 115px; 
+    margin: 10px 5px;
+}
+#lens_gallery.no-image #pixgallery .open_pixgallery,
+#portfolio_gallery.no-image #pixgallery .open_pixgallery
+{
+    border: 1px dashed #d9d9d9;
+}
+#lens_gallery.no-image #pixgallery .open_pixgallery .icon,
+#portfolio_gallery.no-image #pixgallery .open_pixgallery .icon
+{
+    opacity: 1;
+    color: #464646;
+}
+#lens_gallery.no-image #pixgallery .open_pixgallery .icon:before,
+#portfolio_gallery.no-image #pixgallery .open_pixgallery .icon:before
+{
+    content: '\f093';
+}
+#lens_gallery.no-image #pixgallery .open_pixgallery:hover .icon,
+#portfolio_gallery.no-image #pixgallery .open_pixgallery:hover .icon
+{
+    color: #07d3f8;
+}
+
+#lens_gallery.no-image .clear_gallery,
+#portfolio_gallery.no-image .clear_gallery
+{
+    display: none !important;
+}
+
+#lens_gallery #pixgallery .open_pixgallery,
+#portfolio_gallery #pixgallery .open_pixgallery
+{
+    -webkit-transition: opacity .1s ease-in 0; 
+
+    opacity: 1;
+    background: none;
+}
+#lens_gallery #pixgallery .open_pixgallery .icon,
+#portfolio_gallery #pixgallery .open_pixgallery .icon
+{
+    font-size: 40px;
+
+    -webkit-transition: opacity .1s ease-in 0, color .1s ease-in 0;
+
+    opacity: 0;
+    color: #464646;
+}
+#lens_gallery #pixgallery .open_pixgallery .icon:before,
+#portfolio_gallery #pixgallery .open_pixgallery .icon:before
+{
+    content: '\f040';
+}
+#lens_gallery #pixgallery .open_pixgallery .clear_gallery,
+#portfolio_gallery #pixgallery .open_pixgallery .clear_gallery
+{
+    font-size: 11px;
+
+    display: block;
+
+    margin: 0;
+
+    -webkit-transition: opacity .1s ease-in 0, color .1s ease-in 0; 
+    text-transform: uppercase;
+
+    opacity: 0;
+    color: #777;
+    background: none;
+}
+#lens_gallery #pixgallery .open_pixgallery .clear_gallery:hover,
+#portfolio_gallery #pixgallery .open_pixgallery .clear_gallery:hover
+{
+    color: #07d3f8;
+}
+#lens_gallery #pixgallery .open_pixgallery:hover .icon,
+#lens_gallery #pixgallery .open_pixgallery:hover .clear_gallery,
+#portfolio_gallery #pixgallery .open_pixgallery:hover .icon,
+#portfolio_gallery #pixgallery .open_pixgallery:hover .clear_gallery
+{
+    opacity: 1;
+}
+
+#lens_gallery #pixgallery .open_pixgallery .icon:before,
+#portfolio_gallery #pixgallery .open_pixgallery .icon:before
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+}
