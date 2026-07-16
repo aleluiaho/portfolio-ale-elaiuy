@@ -479,8 +479,8 @@ table
     font-weight: normal;
     font-style: normal; 
 
-    src: url('/wp-content/themes/lens/assets/fonts/icon-fonts/fontawesome/fontawesome-webfont.eot?v=4.5.0');
-    src: url('/wp-content/themes/lens/assets/fonts/icon-fonts/fontawesome/fontawesome-webfont.eot#iefix&v=4.5.0') format('embedded-opentype'), url('/wp-content/themes/lens/assets/fonts/icon-fonts/fontawesome/fontawesome-webfont.woff2?v=4.5.0') format('woff2'), url('/wp-content/themes/lens/assets/fonts/icon-fonts/fontawesome/fontawesome-webfont.woff?v=4.5.0') format('woff'), url('/wp-content/themes/lens/assets/fonts/icon-fonts/fontawesome/fontawesome-webfont.ttf?v=4.5.0') format('truetype'), url('/wp-content/themes/lens/assets/fonts/icon-fonts/fontawesome/fontawesome-webfont.svg?v=4.5.0#fontawesomeregular') format('svg');
+    src: url('/portfolio-ale-elaiuy/wp-content/themes/lens/assets/fonts/icon-fonts/fontawesome/fontawesome-webfont.eot?v=4.5.0');
+    src: url('/portfolio-ale-elaiuy/wp-content/themes/lens/assets/fonts/icon-fonts/fontawesome/fontawesome-webfont.eot#iefix&v=4.5.0') format('embedded-opentype'), url('/portfolio-ale-elaiuy/wp-content/themes/lens/assets/fonts/icon-fonts/fontawesome/fontawesome-webfont.woff2?v=4.5.0') format('woff2'), url('/portfolio-ale-elaiuy/wp-content/themes/lens/assets/fonts/icon-fonts/fontawesome/fontawesome-webfont.woff?v=4.5.0') format('woff'), url('/portfolio-ale-elaiuy/wp-content/themes/lens/assets/fonts/icon-fonts/fontawesome/fontawesome-webfont.ttf?v=4.5.0') format('truetype'), url('/portfolio-ale-elaiuy/wp-content/themes/lens/assets/fonts/icon-fonts/fontawesome/fontawesome-webfont.svg?v=4.5.0#fontawesomeregular') format('svg');
 }
 
 .icon
@@ -3861,8 +3861,8 @@ table
     font-weight: normal;
     font-style: normal; 
 
-    src: url('/wp-content/themes/lens/assets/fonts/icon-fonts/entypo2/entypo.eot');
-    src: url('/wp-content/themes/lens/assets/fonts/icon-fonts/entypo2/entypo.eot#iefix') format('embedded-opentype'), url('/wp-content/themes/lens/assets/fonts/icon-fonts/entypo2/entypo.woff') format('woff'), url('/wp-content/themes/lens/assets/fonts/icon-fonts/entypo2/entypo.ttf') format('truetype'), url('/wp-content/themes/lens/assets/fonts/icon-fonts/entypo2/entypo.svg#entypo') format('svg');
+    src: url('/portfolio-ale-elaiuy/wp-content/themes/lens/assets/fonts/icon-fonts/entypo2/entypo.eot');
+    src: url('/portfolio-ale-elaiuy/wp-content/themes/lens/assets/fonts/icon-fonts/entypo2/entypo.eot#iefix') format('embedded-opentype'), url('/portfolio-ale-elaiuy/wp-content/themes/lens/assets/fonts/icon-fonts/entypo2/entypo.woff') format('woff'), url('/portfolio-ale-elaiuy/wp-content/themes/lens/assets/fonts/icon-fonts/entypo2/entypo.ttf') format('truetype'), url('/portfolio-ale-elaiuy/wp-content/themes/lens/assets/fonts/icon-fonts/entypo2/entypo.svg#entypo') format('svg');
 }
 
 @media screen and (-webkit-min-device-pixel-ratio: 0)
@@ -3871,7 +3871,7 @@ table
     {
         font-family: 'entypo';
 
-        src: url('/wp-content/themes/lens/assets/fonts/icon-fonts/entypo2/entypo.svg#entypo') format('svg');
+        src: url('/portfolio-ale-elaiuy/wp-content/themes/lens/assets/fonts/icon-fonts/entypo2/entypo.svg#entypo') format('svg');
     }
 }
 
@@ -11762,7 +11762,7 @@ html.copyright-overlay__container
     height: 32px;
     margin: 6px;
 
-    background: url('/wp-content/themes/lens/assets/img/rs-default.png') -64px 0;
+    background: url('/portfolio-ale-elaiuy/wp-content/themes/lens/assets/img/rs-default.png') -64px 0;
     background-color: #000;
     background-color: rgba(0, 0, 0, .75);
 
@@ -11971,14 +11971,14 @@ img.rsImg
             transform: translate3d(0, 0, 0);
 
     opacity: 1;
-    background: url('/wp-content/themes/lens/assets/img/preloader.gif') top left no-repeat;
+    background: url('/portfolio-ale-elaiuy/wp-content/themes/lens/assets/img/preloader.gif') top left no-repeat;
 }
 
 .single-gallery-fullscreen .rsPreloader,
 .single-gallery-fullwidth .rsPreloader,
 .single-portfolio-fullwidth .rsPreloader
 {
-    background: url('/wp-content/themes/lens/assets/img/preloader-inverse.gif') top left no-repeat;
+    background: url('/portfolio-ale-elaiuy/wp-content/themes/lens/assets/img/preloader-inverse.gif') top left no-repeat;
 }
 
 /* Magnific Popup CSS */
@@ -12647,7 +12647,7 @@ input:not([type]).wpcf7-form-control
 .wpcf7-textarea
 {
     border: 0 !important; 
-    background: url('/wp-content/themes/lens/assets/img/textarea-bg.png');
+    background: url('/portfolio-ale-elaiuy/wp-content/themes/lens/assets/img/textarea-bg.png');
 }
 
 /**
@@ -12784,7 +12784,7 @@ input:not([type]).wpcf7-form-control
             animation: pace-spinner 3s linear infinite; 
 
     border: none;
-    background: url('/wp-content/themes/lens/assets/img/preloader.gif') top left no-repeat;
+    background: url('/portfolio-ale-elaiuy/wp-content/themes/lens/assets/img/preloader.gif') top left no-repeat;
 }
 
 .android-browser.loading .pace .pace-activity
