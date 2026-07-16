@@ -6541,7 +6541,7 @@ html.flexbox, html.copyright-overlay__container {
  * These all require extension in your theme stylesheet, e.g. in your own CSS:
  *
    .sprite{
-       background-image:url(/wp-content/themes/lens/path/to/your/sprite.png);
+       background-image:url(/portfolio-ale-elaiuy/wp-content/themes/lens/path/to/your/sprite.png);
    }
    .sprite--link{ background-position:0   0  ; }
    .sprite--star{ background-position:0 -16px; }
@@ -8504,7 +8504,7 @@ img.rsImg {
   height: 100%;
   display: block;
   z-index: 20;
-  background: url(/wp-content/themes/lens/blank.gif); }
+  background: url(/portfolio-ale-elaiuy/wp-content/themes/lens/blank.gif); }
 
 /*----------------------------------------*\
     $CUSTOM STYLING
