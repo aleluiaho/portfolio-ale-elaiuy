@@ -25,6 +25,52 @@ specifically the 'Template: lens' line. */
   }
 }
 
+/* ABOUT page: soft feathered blur halo behind text blocks */
+body.page-id-40 .sobre-primeira-dobra,
+body.page-id-40 .sobre-segunda-dobra {
+  position: relative;
+  isolation: isolate;
+}
+
+body.page-id-40 .sobre-primeira-dobra::before,
+body.page-id-40 .sobre-segunda-dobra::before {
+  content: "";
+  position: absolute;
+  inset: -18px -22px;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: 28px;
+  background: rgba(12, 20, 30, 0.12);
+  backdrop-filter: blur(6px) saturate(88%);
+  -webkit-backdrop-filter: blur(6px) saturate(88%);
+  -webkit-mask-image: radial-gradient(
+    ellipse 92% 84% at 50% 50%,
+    rgba(0, 0, 0, 0.82) 34%,
+    rgba(0, 0, 0, 0.52) 58%,
+    rgba(0, 0, 0, 0.22) 78%,
+    rgba(0, 0, 0, 0.08) 92%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  mask-image: radial-gradient(
+    ellipse 92% 84% at 50% 50%,
+    rgba(0, 0, 0, 0.82) 34%,
+    rgba(0, 0, 0, 0.52) 58%,
+    rgba(0, 0, 0, 0.22) 78%,
+    rgba(0, 0, 0, 0.08) 92%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+@media screen and (max-width: 700px) {
+  body.page-id-40 .sobre-primeira-dobra::before,
+  body.page-id-40 .sobre-segunda-dobra::before {
+    inset: -12px -12px;
+    border-radius: 20px;
+    backdrop-filter: blur(5px) saturate(88%);
+    -webkit-backdrop-filter: blur(5px) saturate(88%);
+  }
+}
+
 /* On mobile, show galleries as a compact one-column thumbnail list */
 @media screen and (max-width: 699px) {
   .masonry.masonry--gallery[data-columns]::before {
@@ -211,26 +257,26 @@ body.custom-background .masonry--gallery {
   box-shadow: none;
 }
 
-/* Initial 2s highlight state for archive/gallery tile overlays */
-body.tiles-prelight .mosaic__item .image__item-meta,
-body.tiles-prelight .masonry__item-image .image__item-meta,
-body.tiles-prelight .mosaic__item .image_item-title,
-body.tiles-prelight .masonry__item-image .image_item-title,
-body.tiles-prelight .mosaic__item .image_item-description,
-body.tiles-prelight .masonry__item-image .image_item-description,
-body.tiles-prelight .mosaic__item .image_item-categories,
-body.tiles-prelight .masonry__item-image .image_item-categories,
-body.tiles-prelight .mosaic__item .image_item-categories a,
-body.tiles-prelight .masonry__item-image .image_item-categories a,
-body.tiles-prelight .mosaic__item .image_item-category,
-body.tiles-prelight .masonry__item-image .image_item-category {
+/* Initial 2s highlight state for ACERVO tile overlays */
+body.page-id-179.tiles-prelight .mosaic__item .image__item-meta,
+body.page-id-179.tiles-prelight .masonry__item-image .image__item-meta,
+body.page-id-179.tiles-prelight .mosaic__item .image_item-title,
+body.page-id-179.tiles-prelight .masonry__item-image .image_item-title,
+body.page-id-179.tiles-prelight .mosaic__item .image_item-description,
+body.page-id-179.tiles-prelight .masonry__item-image .image_item-description,
+body.page-id-179.tiles-prelight .mosaic__item .image_item-categories,
+body.page-id-179.tiles-prelight .masonry__item-image .image_item-categories,
+body.page-id-179.tiles-prelight .mosaic__item .image_item-categories a,
+body.page-id-179.tiles-prelight .masonry__item-image .image_item-categories a,
+body.page-id-179.tiles-prelight .mosaic__item .image_item-category,
+body.page-id-179.tiles-prelight .masonry__item-image .image_item-category {
   opacity: 1 !important;
   visibility: visible !important;
   text-shadow: 0 0 10px rgba(255, 216, 146, 0.28);
 }
 
-body.tiles-prelight .mosaic__item .icon-play,
-body.tiles-prelight .masonry__item-image .icon-play {
+body.page-id-179.tiles-prelight .mosaic__item .icon-play,
+body.page-id-179.tiles-prelight .masonry__item-image .icon-play {
   opacity: 1 !important;
 }
 
