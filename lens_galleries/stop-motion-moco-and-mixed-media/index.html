@@ -260,6 +260,27 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 				});
 			}
 
+			var videoThumbSelector = '.gallery-grid .image__item-link[href*="player.vimeo.com"], .gallery-grid .image__item-link[href*="vimeo.com/video"], .gallery-grid .image__item-link[href*="youtube.com"], .gallery-grid .image__item-link[href*="youtu.be"]';
+
+			function setVideoThumbTitle($link) {
+				if (!$link || !$link.length) return;
+
+				var stableTitle = ($link.attr('data-thumb-title') || $link.attr('title') || $link.attr('data-title') || '').trim();
+				if (!stableTitle.length) {
+					stableTitle = ($link.find('.image_item-title').first().text() || '').trim();
+				}
+
+				if (stableTitle.length) {
+					$link.attr('data-thumb-title', stableTitle);
+				}
+			}
+
+			function syncVideoThumbTitles() {
+				$(videoThumbSelector).each(function() {
+					setVideoThumbTitle($(this));
+				});
+			}
+
 			function hideEmptyPageHeaders() {
 				$('.page-header').each(function() {
 					var $header = $(this);
@@ -331,6 +352,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 				syncMobileFooterSocialIcons();
 				normalizeYouTubeGalleryLinks();
 				normalizeVimeoGalleryLinks();
+				syncVideoThumbTitles();
 				hideEmptyPageHeaders();
 				triggerTilesPrelight();
 				window.setTimeout(syncMagnificLightboxText, 0);
@@ -354,11 +376,15 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 				syncMobileFooterSocialIcons();
 				normalizeYouTubeGalleryLinks();
 				normalizeVimeoGalleryLinks();
+				syncVideoThumbTitles();
 				triggerTilesPrelight();
 				$(document)
-					.off('mfpOpen.lensChild mfpChange.lensChild click.lensChild keydown.lensChild')
+					.off('mfpOpen.lensChild mfpChange.lensChild click.lensChild keydown.lensChild mouseenter.lensChild focusin.lensChild')
 					.on('mfpOpen.lensChild mfpChange.lensChild', scheduleMagnificTextSync)
 					.on('click.lensChild', '.image__item-link, .mfp-arrow, .mfp-close', scheduleMagnificTextSync)
+					.on('mouseenter.lensChild focusin.lensChild', videoThumbSelector, function() {
+						setVideoThumbTitle($(this));
+					})
 					.on('keydown.lensChild', function(event) {
 						if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
 							scheduleMagnificTextSync();
@@ -532,7 +558,8 @@ font-weight: 300;
 </div><!-- .header -->
 <div id="main" class="content djax-updatable">
 			<div class="masonry  masonry--gallery  js-gallery  gallery-grid" data-columns="4">
-							<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+							
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
 					<a href="https://player.vimeo.com/video/104622599" class="mfp-iframe mfp-video image__item-link" title="War on Drugo | Global Commission on Drug Policies" data-title="War on Drugo | Global Commission on Drug Policies" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 50%;">
 							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-145-030aef63-07a9-46ae-beec-4149d1fba6de.png" alt="War on Drugo | Global Commission on Drug Policies">
@@ -540,13 +567,15 @@ font-weight: 300;
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">War on Drugo | Global Commission on Drug Policies</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
 						</div>
 					</a>
 				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+								
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
 					<a href="https://player.vimeo.com/video/144872749" class="mfp-iframe mfp-video image__item-link" title="Autism Speaks | PSA" data-title="Autism Speaks | PSA" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 50%;">
 							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-146-a52e13d1-47b2-4de5-b95c-e6f0f78a628e.png" alt="Autism Speaks | PSA">
@@ -554,13 +583,15 @@ font-weight: 300;
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">Autism Speaks | PSA</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
 						</div>
 					</a>
 				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+								
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
 					<a href="https://player.vimeo.com/video/266499045" class="mfp-iframe mfp-video image__item-link" title="CHOBANI | THE BIG TOP" data-title="CHOBANI | THE BIG TOP" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 50%;">
 							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-147-5dc0bc6b-591d-41ef-92da-f306e3e1a583.png" alt="CHOBANI | THE BIG TOP">
@@ -568,6 +599,7 @@ font-weight: 300;
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">CHOBANI | THE BIG TOP</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
@@ -587,7 +619,8 @@ font-weight: 300;
 							</div>
 						</div>
 					</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+								
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
 					<a href="https://player.vimeo.com/video/266499337" class="mfp-iframe mfp-video image__item-link" title="Chobani | Fridge Adventure" data-title="Chobani | Fridge Adventure" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 50%;">
 							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-148-89f8f29f-3766-4d5c-8132-e096dde9b24e.png" alt="Chobani | Fridge Adventure">
@@ -595,13 +628,15 @@ font-weight: 300;
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">Chobani | Fridge Adventure</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
 						</div>
 					</a>
 				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+								
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
 					<a href="https://player.vimeo.com/video/505326961" class="mfp-iframe mfp-video image__item-link" title="99 TAXI" data-title="99 TAXI" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 50%;">
 							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-149-c6434396-9072-4d99-a32e-06fa53946d96.png" alt="99 TAXI">
@@ -609,13 +644,15 @@ font-weight: 300;
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">99 TAXI</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
 						</div>
 					</a>
 				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+								
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
 					<a href="https://player.vimeo.com/video/367112277" class="mfp-iframe mfp-video image__item-link" title="ALMOND BREEZE | VEM DESCOBRIR" data-title="ALMOND BREEZE | VEM DESCOBRIR" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 50%;">
 							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-150-da615ad8-4f73-4fcc-a8e1-8b648a2bcfbf.png" alt="ALMOND BREEZE | VEM DESCOBRIR">
@@ -623,13 +660,15 @@ font-weight: 300;
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">ALMOND BREEZE | VEM DESCOBRIR</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
 						</div>
 					</a>
 				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+								
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
 					<a href="https://player.vimeo.com/video/176179485?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" class="mfp-iframe mfp-video image__item-link" title="Caixa Econômica | Caixa de Emoções" data-title="Caixa Econômica | Caixa de Emoções" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 50%;">
 							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-151-afcad687-c5fe-4dd0-a915-431d67cc680b.jpg" alt="Caixa Econômica | Caixa de Emoções">
@@ -637,13 +676,15 @@ font-weight: 300;
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">Caixa Econômica | Caixa de Emoções</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
 						</div>
 					</a>
 				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+								
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
 					<a href="https://player.vimeo.com/video/146018833?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" class="mfp-iframe mfp-video image__item-link" title="Guaraná | Vinhetas Boralá" data-title="Guaraná | Vinhetas Boralá" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 50%;">
 							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-152-8fa07352-232d-4862-b44a-a3898ec700fa.jpg" alt="Guaraná | Vinhetas Boralá">
@@ -651,13 +692,15 @@ font-weight: 300;
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">Guaraná | Vinhetas Boralá</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
 						</div>
 					</a>
 				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+								
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
 					<a href="https://player.vimeo.com/video/1063743907?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" class="mfp-iframe mfp-video image__item-link" title="Maxibon | Nestlé" data-title="Maxibon | Nestlé" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 50%;">
 							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-153-22e352e7-9440-4a44-8337-82d30c062811.png" alt="Maxibon | Nestlé">
@@ -665,13 +708,15 @@ font-weight: 300;
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">Maxibon | Nestlé</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
 						</div>
 					</a>
 				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+								
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
 					<a href="https://player.vimeo.com/video/290566986?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" class="mfp-iframe mfp-video image__item-link" title="Colgate | Squeeze the day" data-title="Colgate | Squeeze the day" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 50%;">
 							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-154-387064ec-ad8c-4ef5-829c-61a07e56b836.png" alt="Colgate | Squeeze the day">
@@ -679,13 +724,15 @@ font-weight: 300;
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">Colgate | Squeeze the day</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
 						</div>
 					</a>
 				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+								
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
 					<a href="https://player.vimeo.com/video/459409558" class="mfp-iframe mfp-video image__item-link" title="Banco Next" data-title="Banco Next" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 50%;">
 							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-155-e9db7376-55ab-4c0d-938f-5c633e16ad8f.png" alt="Banco Next">
@@ -693,13 +740,15 @@ font-weight: 300;
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">Banco Next</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
 						</div>
 					</a>
 				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+								
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
 					<a href="https://player.vimeo.com/video/384649752" class="mfp-iframe mfp-video image__item-link" title="VIVO | Dê Um Pause" data-title="VIVO | Dê Um Pause" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 50%;">
 							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-156-1ce8d07f-e209-4858-9448-8ba246f8beab.png" alt="VIVO | Dê Um Pause">
@@ -707,13 +756,15 @@ font-weight: 300;
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">VIVO | Dê Um Pause</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
 						</div>
 					</a>
 				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+								
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
 					<a href="https://player.vimeo.com/video/136258061" class="mfp-iframe mfp-video image__item-link" title="A Vida Privada Dos Hipopótamos | Stop Motion Excerpt" data-title="A Vida Privada Dos Hipopótamos | Stop Motion Excerpt" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 50%;">
 							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-157-2d095d6a-cfee-4bc3-acf6-780e33c62703.png" alt="A Vida Privada Dos Hipopótamos | Stop Motion Excerpt">
@@ -721,6 +772,7 @@ font-weight: 300;
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">A Vida Privada Dos Hipopótamos | Stop Motion Excerpt</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
@@ -778,7 +830,7 @@ var lens_static_resources = {"scripts":{"google-maps-api":"https://maps.google.c
 </script>
 <script id="wpgrade-main-scripts-js" src="/wp-content/themes/lens/assets/js/main.js?ver=202606271941"></script>
 <script id="pixlikes-plugin-script-js-extra">
-var locals = {"ajax_url":"/wp-admin/admin-ajax.php","ajax_nounce":"a6d169f9b6","load_likes_with_ajax":"","already_voted_msg":"You already voted!","like_on_action":"hover","hover_time":"1000","free_votes":""};
+var locals = {"ajax_url":"/wp-admin/admin-ajax.php","ajax_nounce":"d0dc2b8455","load_likes_with_ajax":"","already_voted_msg":"You already voted!","like_on_action":"hover","hover_time":"1000","free_votes":""};
 //# sourceURL=pixlikes-plugin-script-js-extra
 </script>
 <script id="pixlikes-plugin-script-js" src="/wp-content/plugins/pixlikes/js/public.js?ver=1.0.0"></script>

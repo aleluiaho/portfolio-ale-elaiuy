@@ -260,6 +260,27 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 				});
 			}
 
+			var videoThumbSelector = '.gallery-grid .image__item-link[href*="player.vimeo.com"], .gallery-grid .image__item-link[href*="vimeo.com/video"], .gallery-grid .image__item-link[href*="youtube.com"], .gallery-grid .image__item-link[href*="youtu.be"]';
+
+			function setVideoThumbTitle($link) {
+				if (!$link || !$link.length) return;
+
+				var stableTitle = ($link.attr('data-thumb-title') || $link.attr('title') || $link.attr('data-title') || '').trim();
+				if (!stableTitle.length) {
+					stableTitle = ($link.find('.image_item-title').first().text() || '').trim();
+				}
+
+				if (stableTitle.length) {
+					$link.attr('data-thumb-title', stableTitle);
+				}
+			}
+
+			function syncVideoThumbTitles() {
+				$(videoThumbSelector).each(function() {
+					setVideoThumbTitle($(this));
+				});
+			}
+
 			function hideEmptyPageHeaders() {
 				$('.page-header').each(function() {
 					var $header = $(this);
@@ -331,6 +352,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 				syncMobileFooterSocialIcons();
 				normalizeYouTubeGalleryLinks();
 				normalizeVimeoGalleryLinks();
+				syncVideoThumbTitles();
 				hideEmptyPageHeaders();
 				triggerTilesPrelight();
 				window.setTimeout(syncMagnificLightboxText, 0);
@@ -354,11 +376,15 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 				syncMobileFooterSocialIcons();
 				normalizeYouTubeGalleryLinks();
 				normalizeVimeoGalleryLinks();
+				syncVideoThumbTitles();
 				triggerTilesPrelight();
 				$(document)
-					.off('mfpOpen.lensChild mfpChange.lensChild click.lensChild keydown.lensChild')
+					.off('mfpOpen.lensChild mfpChange.lensChild click.lensChild keydown.lensChild mouseenter.lensChild focusin.lensChild')
 					.on('mfpOpen.lensChild mfpChange.lensChild', scheduleMagnificTextSync)
 					.on('click.lensChild', '.image__item-link, .mfp-arrow, .mfp-close', scheduleMagnificTextSync)
+					.on('mouseenter.lensChild focusin.lensChild', videoThumbSelector, function() {
+						setVideoThumbTitle($(this));
+					})
 					.on('keydown.lensChild', function(event) {
 						if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
 							scheduleMagnificTextSync();
@@ -532,7 +558,8 @@ font-weight: 300;
 </div><!-- .header -->
 <div id="main" class="content djax-updatable">
 			<div class="masonry  masonry--gallery  js-gallery  gallery-grid" data-columns="4">
-							<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+							
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
 					<a href="https://player.vimeo.com/video/362354381" class="mfp-iframe mfp-video image__item-link" title="Netflix | Elite Season 2 Brazilian Premiere Ad Campaig" data-title="Netflix | Elite Season 2 Brazilian Premiere Ad Campaig" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 50%;">
 							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-131-fba3779c-fd82-4f5f-b604-80aa726f2a2e.png" alt="Netflix | Elite Season 2 Brazilian Premiere Ad Campaig">
@@ -540,13 +567,15 @@ font-weight: 300;
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">Netflix | Elite Season 2 Brazilian Premiere Ad Campaig</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
 						</div>
 					</a>
 				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+								
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
 					<a href="https://player.vimeo.com/video/224123876" class="mfp-iframe mfp-video image__item-link" title="Netflix | G.L.O.W | Brazil's Launch Campaign" data-title="Netflix | G.L.O.W | Brazil's Launch Campaign" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 50%;">
 							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-132-9fa6c5de-720e-4caa-b54a-af87c3f2e778.png" alt="Netflix | G.L.O.W | Brazil's Launch Campaign">
@@ -554,13 +583,15 @@ font-weight: 300;
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">Netflix | G.L.O.W | Brazil's Launch Campaign</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
 						</div>
 					</a>
 				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+								
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
 					<a href="https://player.vimeo.com/video/1181598378?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" class="mfp-iframe mfp-video image__item-link" title="Nivea | Eliana" data-title="Nivea | Eliana" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 50%;">
 							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-133-80f17eca-f54e-43a5-92dc-2841fa4960ca.png" alt="Nivea | Eliana">
@@ -568,6 +599,7 @@ font-weight: 300;
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">Nivea | Eliana</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
@@ -587,7 +619,8 @@ font-weight: 300;
 							</div>
 						</div>
 					</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+								
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
 					<a href="https://player.vimeo.com/video/372636740?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" class="mfp-iframe mfp-video image__item-link" title="Boticário | Espelho" data-title="Boticário | Espelho" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 50%;">
 							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-134-aa13fb47-c5f1-4513-a524-5319f97368b2.jpg" alt="Boticário | Espelho">
@@ -595,13 +628,15 @@ font-weight: 300;
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">Boticário | Espelho</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
 						</div>
 					</a>
 				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+								
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
 					<a href="https://player.vimeo.com/video/998849089?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" class="mfp-iframe mfp-video image__item-link" title="Avon Care 5em1" data-title="Avon Care 5em1" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 50%;">
 							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-135-014a3014-27d6-4f2c-b58a-73e1dcffc902.png" alt="Avon Care 5em1">
@@ -609,13 +644,15 @@ font-weight: 300;
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">Avon Care 5em1</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
 						</div>
 					</a>
 				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+								
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
 					<a href="https://player.vimeo.com/video/530289713?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" class="mfp-iframe mfp-video image__item-link" title="Guarana Natu | Suzana Vieira" data-title="Guarana Natu | Suzana Vieira" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 50%;">
 							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-136-c3a1b72f-6dcf-4056-b975-5cadf15144af.png" alt="Guarana Natu | Suzana Vieira">
@@ -623,13 +660,15 @@ font-weight: 300;
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">Guarana Natu | Suzana Vieira</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
 						</div>
 					</a>
 				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+								
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
 					<a href="https://player.vimeo.com/video/266504106?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" class="mfp-iframe mfp-video image__item-link" title="Netflix | Casa de Papel Ad" data-title="Netflix | Casa de Papel Ad" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 50%;">
 							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-137-6b6af3d1-97c8-4d9e-82b5-becd83815e31.jpg" alt="Netflix | Casa de Papel Ad">
@@ -637,13 +676,15 @@ font-weight: 300;
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">Netflix | Casa de Papel Ad</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
 						</div>
 					</a>
 				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+								
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
 					<a href="https://player.vimeo.com/video/333527041?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" class="mfp-iframe mfp-video image__item-link" title="Netflix Casa | O Date Perfeito" data-title="Netflix Casa | O Date Perfeito" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 50%;">
 							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-138-47093588-0fe5-45ac-ad02-78393f07a0ff.jpg" alt="Netflix Casa | O Date Perfeito">
@@ -651,13 +692,15 @@ font-weight: 300;
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">Netflix Casa | O Date Perfeito</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
 						</div>
 					</a>
 				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+								
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
 					<a href="https://player.vimeo.com/video/421914614" class="mfp-iframe mfp-video image__item-link" title="NETFLIX | EL CAMINO FILM BRAZILIAN PREMIERE CAMPAING" data-title="NETFLIX | EL CAMINO FILM BRAZILIAN PREMIERE CAMPAING" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 50%;">
 							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-139-ff0e1710-f197-4d30-bb00-ebcd6bdd8405.png" alt="NETFLIX | EL CAMINO FILM BRAZILIAN PREMIERE CAMPAING">
@@ -665,13 +708,15 @@ font-weight: 300;
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">NETFLIX | EL CAMINO FILM BRAZILIAN PREMIERE CAMPAING</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
 						</div>
 					</a>
 				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+								
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
 					<a href="https://player.vimeo.com/video/306440292" class="mfp-iframe mfp-video image__item-link" title="NETFLIX | ELITE SERIES BRAZILIAN PREMIERE" data-title="NETFLIX | ELITE SERIES BRAZILIAN PREMIERE" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 50%;">
 							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-140-3e4d1820-7d4b-494e-87c7-a86aaa3038c1.png" alt="NETFLIX | ELITE SERIES BRAZILIAN PREMIERE">
@@ -679,13 +724,15 @@ font-weight: 300;
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">NETFLIX | ELITE SERIES BRAZILIAN PREMIERE</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
 						</div>
 					</a>
 				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+								
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
 					<a href="https://player.vimeo.com/video/774266660?h=d6e8ea01bc" class="mfp-iframe mfp-video image__item-link" title="Agora Vai - Mercado Pago" data-title="Agora Vai - Mercado Pago" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 50%;">
 							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-141-3f4bb06b-1703-4363-b8ab-6b5fd3fa4225.png" alt="Agora Vai - Mercado Pago">
@@ -693,13 +740,15 @@ font-weight: 300;
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">Agora Vai - Mercado Pago</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
 						</div>
 					</a>
 				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+								
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
 					<a href="https://player.vimeo.com/video/715664975?h=d66ef3b7b6&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" class="mfp-iframe mfp-video image__item-link" title="Relevância" data-title="Relevância" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 50%;">
 							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-142-8cfe8632-3812-41ba-94c9-277a3fe153e4.png" alt="Relevância">
@@ -707,13 +756,15 @@ font-weight: 300;
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">Relevância</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
 						</div>
 					</a>
 				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+								
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
 					<a href="https://player.vimeo.com/video/215898785?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" class="mfp-iframe mfp-video image__item-link" title="Technos | Juliana Paes" data-title="Technos | Juliana Paes" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 50%;">
 							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-143-8abafc29-ce00-4f9f-a4ee-7a0a94b00036.jpg" alt="Technos | Juliana Paes">
@@ -721,6 +772,7 @@ font-weight: 300;
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">Technos | Juliana Paes</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
@@ -778,7 +830,7 @@ var lens_static_resources = {"scripts":{"google-maps-api":"https://maps.google.c
 </script>
 <script id="wpgrade-main-scripts-js" src="/wp-content/themes/lens/assets/js/main.js?ver=202606271941"></script>
 <script id="pixlikes-plugin-script-js-extra">
-var locals = {"ajax_url":"/wp-admin/admin-ajax.php","ajax_nounce":"a6d169f9b6","load_likes_with_ajax":"","already_voted_msg":"You already voted!","like_on_action":"hover","hover_time":"1000","free_votes":""};
+var locals = {"ajax_url":"/wp-admin/admin-ajax.php","ajax_nounce":"d0dc2b8455","load_likes_with_ajax":"","already_voted_msg":"You already voted!","like_on_action":"hover","hover_time":"1000","free_votes":""};
 //# sourceURL=pixlikes-plugin-script-js-extra
 </script>
 <script id="pixlikes-plugin-script-js" src="/wp-content/plugins/pixlikes/js/public.js?ver=1.0.0"></script>

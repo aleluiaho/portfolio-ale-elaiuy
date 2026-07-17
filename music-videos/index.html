@@ -260,6 +260,27 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 				});
 			}
 
+			var videoThumbSelector = '.gallery-grid .image__item-link[href*="player.vimeo.com"], .gallery-grid .image__item-link[href*="vimeo.com/video"], .gallery-grid .image__item-link[href*="youtube.com"], .gallery-grid .image__item-link[href*="youtu.be"]';
+
+			function setVideoThumbTitle($link) {
+				if (!$link || !$link.length) return;
+
+				var stableTitle = ($link.attr('data-thumb-title') || $link.attr('title') || $link.attr('data-title') || '').trim();
+				if (!stableTitle.length) {
+					stableTitle = ($link.find('.image_item-title').first().text() || '').trim();
+				}
+
+				if (stableTitle.length) {
+					$link.attr('data-thumb-title', stableTitle);
+				}
+			}
+
+			function syncVideoThumbTitles() {
+				$(videoThumbSelector).each(function() {
+					setVideoThumbTitle($(this));
+				});
+			}
+
 			function hideEmptyPageHeaders() {
 				$('.page-header').each(function() {
 					var $header = $(this);
@@ -331,6 +352,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 				syncMobileFooterSocialIcons();
 				normalizeYouTubeGalleryLinks();
 				normalizeVimeoGalleryLinks();
+				syncVideoThumbTitles();
 				hideEmptyPageHeaders();
 				triggerTilesPrelight();
 				window.setTimeout(syncMagnificLightboxText, 0);
@@ -354,11 +376,15 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 				syncMobileFooterSocialIcons();
 				normalizeYouTubeGalleryLinks();
 				normalizeVimeoGalleryLinks();
+				syncVideoThumbTitles();
 				triggerTilesPrelight();
 				$(document)
-					.off('mfpOpen.lensChild mfpChange.lensChild click.lensChild keydown.lensChild')
+					.off('mfpOpen.lensChild mfpChange.lensChild click.lensChild keydown.lensChild mouseenter.lensChild focusin.lensChild')
 					.on('mfpOpen.lensChild mfpChange.lensChild', scheduleMagnificTextSync)
 					.on('click.lensChild', '.image__item-link, .mfp-arrow, .mfp-close', scheduleMagnificTextSync)
+					.on('mouseenter.lensChild focusin.lensChild', videoThumbSelector, function() {
+						setVideoThumbTitle($(this));
+					})
 					.on('keydown.lensChild', function(event) {
 						if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
 							scheduleMagnificTextSync();
@@ -531,44 +557,48 @@ font-weight: 300;
 </div><!-- .header -->
 <div id="main" class="content djax-updatable">
 			<div class="masonry  masonry--gallery  js-gallery  gallery-grid" data-columns="4">
-							<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
-					<a href="https://player.vimeo.com/video/210287265" class="mfp-iframe mfp-video image__item-link" title="Mandume | Emicida" data-title="Mandume | Emicida" data-alt="Label: Laboratório Fantasma
-Produtora: Rotina Filmes
-Diretora: Gabi Jacob " data-effect="mfp-zoom-in" itemprop="contentURL">
+							
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+					<a href="https://player.vimeo.com/video/210287265" class="mfp-iframe mfp-video image__item-link" title="Mandume | Emicida" data-title="Mandume | Emicida" data-alt="Label: Laboratório Fantasma | Produtora: Rotina Filmes | Diretora: Gabi Jacob " data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 49.875%;">
 							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-168-screenshot.png" alt="">
 						</div>
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">Mandume | Emicida</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
 						</div>
 					</a>
 				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
-					<a href="https://player.vimeo.com/video/419119447" class="mfp-iframe mfp-video image__item-link" title="Selvagens à Procura de Lei | Déjà vu" data-title="Selvagens à Procura de Lei | Déjà vu" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
+								
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+					<a href="https://player.vimeo.com/video/419119447" class="mfp-iframe mfp-video image__item-link" title="Selvagens à Procura de Lei | Déjà vu" data-title="Selvagens à Procura de Lei | Déjà vu" data-alt="Produtora: Awake Fill | Direção: Rodrigo Fleury" data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 50.125%;">
-							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-169-screenshot.png" alt="Selvagens à Procura de Lei | Déjà vu">
+							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-169-screenshot.png" alt="">
 						</div>
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">Selvagens à Procura de Lei | Déjà vu</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
 						</div>
 					</a>
 				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
-					<a href="https://player.vimeo.com/video/165490865?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" class="mfp-iframe mfp-video image__item-link" title="MAIS UMA VEZ | ANA CAROLINA &amp; SEU JORGE" data-title="MAIS UMA VEZ | ANA CAROLINA &amp; SEU JORGE" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
+								
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+					<a href="https://player.vimeo.com/video/165490865?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" class="mfp-iframe mfp-video image__item-link" title="Mais Uma Vez | Ana Carolina &amp; Seu Jorge" data-title="Mais Uma Vez | Ana Carolina &amp; Seu Jorge" data-alt="Produtora: Academia de Filmes | Direção: Fernanda Weinfeld" data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 49.5%;">
-							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-170-screenshot.png" alt="MAIS UMA VEZ | ANA CAROLINA &amp; SEU JORGE">
+							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-170-screenshot.png" alt="">
 						</div>
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">Mais Uma Vez | Ana Carolina &amp; Seu Jorge</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
@@ -588,56 +618,32 @@ Diretora: Gabi Jacob " data-effect="mfp-zoom-in" itemprop="contentURL">
 							</div>
 						</div>
 					</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
-					<a href="https://player.vimeo.com/video/419304009" class="mfp-iframe mfp-video image__item-link" title="ALDO THE BAND | PAPERMAZE" data-title="ALDO THE BAND | PAPERMAZE" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
+								
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+					<a href="https://player.vimeo.com/video/419304009" class="mfp-iframe mfp-video image__item-link" title="Papermaze | Aldo The Band" data-title="Papermaze | Aldo The Band" data-alt="Produtora: Atomo Vfx | Direção: Nylon Duo" data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 49.875%;">
-							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-171-screenshot.png" alt="ALDO THE BAND | PAPERMAZE">
+							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-171-screenshot.png" alt="">
 						</div>
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">Papermaze | Aldo The Band</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
 						</div>
 					</a>
 				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
-					<a href="https://www.vimeo.com/alexandreelaiuy" class="mfp-iframe mfp-video image__item-link" title="TÁ QUE TÁ | ZAAC, SIMONE &amp; SIMARIA" data-title="TÁ QUE TÁ | ZAAC, SIMONE &amp; SIMARIA" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
+								
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+					<a href="https://player.vimeo.com/video/1066619059?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" class="mfp-iframe mfp-video image__item-link" title="Intro TOUR 2022 | Chemical Surf" data-title="Intro TOUR 2022 | Chemical Surf" data-alt="Produtora: Associados | Direção: Nylon Duo" data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 49.75%;">
-							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-172-screenshot.png" alt="TÁ QUE TÁ | ZAAC, SIMONE &amp; SIMARIA">
+							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-174-screenshot.png" alt="">
 						</div>
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
-																			<i class="icon-play"></i>
-																	</div>
-							</div>
-						</div>
-					</a>
-				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
-					<a href="https://player.vimeo.com/video/167895580?h=bc03731298&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" class="mfp-iframe mfp-video image__item-link" title="FISCAL | MC QUEER | FERNANDA WEINFELD" data-title="FISCAL | MC QUEER | FERNANDA WEINFELD" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
-						<div class="image__item-wrapper" style="padding-top: 41.875%;">
-							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-173-screenshot.png" alt="FISCAL | MC QUEER | FERNANDA WEINFELD">
-						</div>
-						<div class="image__item-meta">
-							<div class="image_item-table">
-								<div class="image_item-cell">
-																			<i class="icon-play"></i>
-																	</div>
-							</div>
-						</div>
-					</a>
-				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
-					<a href="https://player.vimeo.com/video/1066619059?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" class="mfp-iframe mfp-video image__item-link" title="Chemical Surf | Intro TOUR 2022" data-title="Chemical Surf | Intro TOUR 2022" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
-						<div class="image__item-wrapper" style="padding-top: 49.75%;">
-							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-174-screenshot.png" alt="Chemical Surf | Intro TOUR 2022">
-						</div>
-						<div class="image__item-meta">
-							<div class="image_item-table">
-								<div class="image_item-cell">
+									<div class="image_item-title">Intro TOUR 2022 | Chemical Surf</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
@@ -695,7 +701,7 @@ var lens_static_resources = {"scripts":{"google-maps-api":"https://maps.google.c
 </script>
 <script id="wpgrade-main-scripts-js" src="/wp-content/themes/lens/assets/js/main.js?ver=202606271941"></script>
 <script id="pixlikes-plugin-script-js-extra">
-var locals = {"ajax_url":"/wp-admin/admin-ajax.php","ajax_nounce":"a6d169f9b6","load_likes_with_ajax":"","already_voted_msg":"You already voted!","like_on_action":"hover","hover_time":"1000","free_votes":""};
+var locals = {"ajax_url":"/wp-admin/admin-ajax.php","ajax_nounce":"d0dc2b8455","load_likes_with_ajax":"","already_voted_msg":"You already voted!","like_on_action":"hover","hover_time":"1000","free_votes":""};
 //# sourceURL=pixlikes-plugin-script-js-extra
 </script>
 <script id="pixlikes-plugin-script-js" src="/wp-content/plugins/pixlikes/js/public.js?ver=1.0.0"></script>

@@ -260,6 +260,27 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 				});
 			}
 
+			var videoThumbSelector = '.gallery-grid .image__item-link[href*="player.vimeo.com"], .gallery-grid .image__item-link[href*="vimeo.com/video"], .gallery-grid .image__item-link[href*="youtube.com"], .gallery-grid .image__item-link[href*="youtu.be"]';
+
+			function setVideoThumbTitle($link) {
+				if (!$link || !$link.length) return;
+
+				var stableTitle = ($link.attr('data-thumb-title') || $link.attr('title') || $link.attr('data-title') || '').trim();
+				if (!stableTitle.length) {
+					stableTitle = ($link.find('.image_item-title').first().text() || '').trim();
+				}
+
+				if (stableTitle.length) {
+					$link.attr('data-thumb-title', stableTitle);
+				}
+			}
+
+			function syncVideoThumbTitles() {
+				$(videoThumbSelector).each(function() {
+					setVideoThumbTitle($(this));
+				});
+			}
+
 			function hideEmptyPageHeaders() {
 				$('.page-header').each(function() {
 					var $header = $(this);
@@ -331,6 +352,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 				syncMobileFooterSocialIcons();
 				normalizeYouTubeGalleryLinks();
 				normalizeVimeoGalleryLinks();
+				syncVideoThumbTitles();
 				hideEmptyPageHeaders();
 				triggerTilesPrelight();
 				window.setTimeout(syncMagnificLightboxText, 0);
@@ -354,11 +376,15 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 				syncMobileFooterSocialIcons();
 				normalizeYouTubeGalleryLinks();
 				normalizeVimeoGalleryLinks();
+				syncVideoThumbTitles();
 				triggerTilesPrelight();
 				$(document)
-					.off('mfpOpen.lensChild mfpChange.lensChild click.lensChild keydown.lensChild')
+					.off('mfpOpen.lensChild mfpChange.lensChild click.lensChild keydown.lensChild mouseenter.lensChild focusin.lensChild')
 					.on('mfpOpen.lensChild mfpChange.lensChild', scheduleMagnificTextSync)
 					.on('click.lensChild', '.image__item-link, .mfp-arrow, .mfp-close', scheduleMagnificTextSync)
+					.on('mouseenter.lensChild focusin.lensChild', videoThumbSelector, function() {
+						setVideoThumbTitle($(this));
+					})
 					.on('keydown.lensChild', function(event) {
 						if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
 							scheduleMagnificTextSync();
@@ -532,7 +558,8 @@ font-weight: 300;
 </div><!-- .header -->
 <div id="main" class="content djax-updatable">
 			<div class="masonry  masonry--gallery  js-gallery  gallery-grid" data-columns="4">
-							<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+							
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
 					<a href="https://player.vimeo.com/video/998848932?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" class="mfp-iframe mfp-video image__item-link" title="Fleishman | Luciana Gimenez" data-title="Fleishman | Luciana Gimenez" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 50%;">
 							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-117-882f5437-88f8-4193-9a65-77e7b827166e.png" alt="Fleishman | Luciana Gimenez">
@@ -540,13 +567,15 @@ font-weight: 300;
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">Fleishman | Luciana Gimenez</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
 						</div>
 					</a>
 				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+								
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
 					<a href="https://player.vimeo.com/video/862842185?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" class="mfp-iframe mfp-video image__item-link" title="Sadia | Seu dia pede sadia" data-title="Sadia | Seu dia pede sadia" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 50%;">
 							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-118-96810398-da12-46c0-afae-f42ae97dd8b4.png" alt="Sadia | Seu dia pede sadia">
@@ -554,13 +583,15 @@ font-weight: 300;
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">Sadia | Seu dia pede sadia</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
 						</div>
 					</a>
 				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+								
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
 					<a href="https://player.vimeo.com/video/1116153434?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" class="mfp-iframe mfp-video image__item-link" title="Bob's | Frangamente" data-title="Bob's | Frangamente" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 50%;">
 							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-119-32f76dd2-83ed-4d3a-94f0-3ab8de59875a.png" alt="Bob's | Frangamente">
@@ -568,6 +599,7 @@ font-weight: 300;
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">Bob's | Frangamente</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
@@ -587,7 +619,8 @@ font-weight: 300;
 							</div>
 						</div>
 					</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+								
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
 					<a href="https://player.vimeo.com/video/998849395?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" class="mfp-iframe mfp-video image__item-link" title="Heinz | Superioridade" data-title="Heinz | Superioridade" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 50%;">
 							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-120-98612b4c-a9d3-4d1d-8388-18e71fdcf658.png" alt="Heinz | Superioridade">
@@ -595,13 +628,15 @@ font-weight: 300;
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">Heinz | Superioridade</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
 						</div>
 					</a>
 				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+								
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
 					<a href="https://player.vimeo.com/video/1000780819?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" class="mfp-iframe mfp-video image__item-link" title="Maizena | 150 anos" data-title="Maizena | 150 anos" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 50%;">
 							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-121-b37cd815-d160-4fe0-bb93-089f136b7c9a.png" alt="Maizena | 150 anos">
@@ -609,13 +644,15 @@ font-weight: 300;
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">Maizena | 150 anos</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
 						</div>
 					</a>
 				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+								
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
 					<a href="https://player.vimeo.com/video/813600583?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" class="mfp-iframe mfp-video image__item-link" title="Mc Donalds Chiken Legend" data-title="Mc Donalds Chiken Legend" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 50%;">
 							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-122-e8897bcb-137f-45be-a78c-0b51bdb943da.png" alt="Mc Donalds Chiken Legend">
@@ -623,13 +660,15 @@ font-weight: 300;
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">Mc Donalds Chiken Legend</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
 						</div>
 					</a>
 				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+								
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
 					<a href="https://player.vimeo.com/video/827722928?h=f529de4df4&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" class="mfp-iframe mfp-video image__item-link" title="Wickbold Integrais" data-title="Wickbold Integrais" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 50%;">
 							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-123-81c64bb8-d61a-4446-ab6c-9f5ae9dc9cce.png" alt="Wickbold Integrais">
@@ -637,13 +676,15 @@ font-weight: 300;
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">Wickbold Integrais</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
 						</div>
 					</a>
 				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+								
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
 					<a href="https://player.vimeo.com/video/1045117030?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" class="mfp-iframe mfp-video image__item-link" title="Chandelle Chantilly | Chan Chan" data-title="Chandelle Chantilly | Chan Chan" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 50%;">
 							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-124-1c68e6ee-fb66-45a1-be02-4efbfcbc204f.jpg" alt="Chandelle Chantilly | Chan Chan">
@@ -651,13 +692,15 @@ font-weight: 300;
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">Chandelle Chantilly | Chan Chan</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
 						</div>
 					</a>
 				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+								
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
 					<a href="https://player.vimeo.com/video/998849583?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" class="mfp-iframe mfp-video image__item-link" title="Sadia NBA 2024" data-title="Sadia NBA 2024" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 50%;">
 							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-125-5d6ce8bf-980e-4910-8135-742d4655405e.png" alt="Sadia NBA 2024">
@@ -665,13 +708,15 @@ font-weight: 300;
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">Sadia NBA 2024</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
 						</div>
 					</a>
 				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+								
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
 					<a href="https://player.vimeo.com/video/530288159?h=daa62f16bf&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" class="mfp-iframe mfp-video image__item-link" title="Burguer King" data-title="Burguer King" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 50%;">
 							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-126-c8707439-f32f-4e87-8f76-48c7319a707f.png" alt="Burguer King">
@@ -679,13 +724,15 @@ font-weight: 300;
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">Burguer King</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
 						</div>
 					</a>
 				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+								
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
 					<a href="https://player.vimeo.com/video/1086040088?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" class="mfp-iframe mfp-video image__item-link" title="Batavo Nuv | Treino" data-title="Batavo Nuv | Treino" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 50%;">
 							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-127-a27a8748-29d6-4a5e-8776-832700687b52.png" alt="Batavo Nuv | Treino">
@@ -693,13 +740,15 @@ font-weight: 300;
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">Batavo Nuv | Treino</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
 						</div>
 					</a>
 				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+								
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
 					<a href="https://player.vimeo.com/video/360623647" class="mfp-iframe mfp-video image__item-link" title="BATAVO | NUV" data-title="BATAVO | NUV" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 50%;">
 							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-128-b53b3da4-449a-477e-af66-b487a649fc16.png" alt="BATAVO | NUV">
@@ -707,13 +756,15 @@ font-weight: 300;
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">BATAVO | NUV</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
 						</div>
 					</a>
 				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+								
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
 					<a href="https://player.vimeo.com/video/356000382" class="mfp-iframe mfp-video image__item-link" title="President | O Que Que Tem?" data-title="President | O Que Que Tem?" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 50%;">
 							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-129-0d40d1dd-e4e8-495c-8193-54f3c9c5e254.png" alt="President | O Que Que Tem?">
@@ -721,6 +772,7 @@ font-weight: 300;
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">President | O Que Que Tem?</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
@@ -778,7 +830,7 @@ var lens_static_resources = {"scripts":{"google-maps-api":"https://maps.google.c
 </script>
 <script id="wpgrade-main-scripts-js" src="/wp-content/themes/lens/assets/js/main.js?ver=202606271941"></script>
 <script id="pixlikes-plugin-script-js-extra">
-var locals = {"ajax_url":"/wp-admin/admin-ajax.php","ajax_nounce":"a6d169f9b6","load_likes_with_ajax":"","already_voted_msg":"You already voted!","like_on_action":"hover","hover_time":"1000","free_votes":""};
+var locals = {"ajax_url":"/wp-admin/admin-ajax.php","ajax_nounce":"d0dc2b8455","load_likes_with_ajax":"","already_voted_msg":"You already voted!","like_on_action":"hover","hover_time":"1000","free_votes":""};
 //# sourceURL=pixlikes-plugin-script-js-extra
 </script>
 <script id="pixlikes-plugin-script-js" src="/wp-content/plugins/pixlikes/js/public.js?ver=1.0.0"></script>

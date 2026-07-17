@@ -260,6 +260,27 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 				});
 			}
 
+			var videoThumbSelector = '.gallery-grid .image__item-link[href*="player.vimeo.com"], .gallery-grid .image__item-link[href*="vimeo.com/video"], .gallery-grid .image__item-link[href*="youtube.com"], .gallery-grid .image__item-link[href*="youtu.be"]';
+
+			function setVideoThumbTitle($link) {
+				if (!$link || !$link.length) return;
+
+				var stableTitle = ($link.attr('data-thumb-title') || $link.attr('title') || $link.attr('data-title') || '').trim();
+				if (!stableTitle.length) {
+					stableTitle = ($link.find('.image_item-title').first().text() || '').trim();
+				}
+
+				if (stableTitle.length) {
+					$link.attr('data-thumb-title', stableTitle);
+				}
+			}
+
+			function syncVideoThumbTitles() {
+				$(videoThumbSelector).each(function() {
+					setVideoThumbTitle($(this));
+				});
+			}
+
 			function hideEmptyPageHeaders() {
 				$('.page-header').each(function() {
 					var $header = $(this);
@@ -331,6 +352,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 				syncMobileFooterSocialIcons();
 				normalizeYouTubeGalleryLinks();
 				normalizeVimeoGalleryLinks();
+				syncVideoThumbTitles();
 				hideEmptyPageHeaders();
 				triggerTilesPrelight();
 				window.setTimeout(syncMagnificLightboxText, 0);
@@ -354,11 +376,15 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 				syncMobileFooterSocialIcons();
 				normalizeYouTubeGalleryLinks();
 				normalizeVimeoGalleryLinks();
+				syncVideoThumbTitles();
 				triggerTilesPrelight();
 				$(document)
-					.off('mfpOpen.lensChild mfpChange.lensChild click.lensChild keydown.lensChild')
+					.off('mfpOpen.lensChild mfpChange.lensChild click.lensChild keydown.lensChild mouseenter.lensChild focusin.lensChild')
 					.on('mfpOpen.lensChild mfpChange.lensChild', scheduleMagnificTextSync)
 					.on('click.lensChild', '.image__item-link, .mfp-arrow, .mfp-close', scheduleMagnificTextSync)
+					.on('mouseenter.lensChild focusin.lensChild', videoThumbSelector, function() {
+						setVideoThumbTitle($(this));
+					})
 					.on('keydown.lensChild', function(event) {
 						if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
 							scheduleMagnificTextSync();
@@ -644,7 +670,7 @@ var lens_static_resources = {"scripts":{"google-maps-api":"https://maps.google.c
 </script>
 <script id="wpgrade-main-scripts-js" src="/wp-content/themes/lens/assets/js/main.js?ver=202606271941"></script>
 <script id="pixlikes-plugin-script-js-extra">
-var locals = {"ajax_url":"/wp-admin/admin-ajax.php","ajax_nounce":"a6d169f9b6","load_likes_with_ajax":"","already_voted_msg":"You already voted!","like_on_action":"hover","hover_time":"1000","free_votes":""};
+var locals = {"ajax_url":"/wp-admin/admin-ajax.php","ajax_nounce":"d0dc2b8455","load_likes_with_ajax":"","already_voted_msg":"You already voted!","like_on_action":"hover","hover_time":"1000","free_votes":""};
 //# sourceURL=pixlikes-plugin-script-js-extra
 </script>
 <script id="pixlikes-plugin-script-js" src="/wp-content/plugins/pixlikes/js/public.js?ver=1.0.0"></script>

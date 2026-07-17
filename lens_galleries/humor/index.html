@@ -260,6 +260,27 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 				});
 			}
 
+			var videoThumbSelector = '.gallery-grid .image__item-link[href*="player.vimeo.com"], .gallery-grid .image__item-link[href*="vimeo.com/video"], .gallery-grid .image__item-link[href*="youtube.com"], .gallery-grid .image__item-link[href*="youtu.be"]';
+
+			function setVideoThumbTitle($link) {
+				if (!$link || !$link.length) return;
+
+				var stableTitle = ($link.attr('data-thumb-title') || $link.attr('title') || $link.attr('data-title') || '').trim();
+				if (!stableTitle.length) {
+					stableTitle = ($link.find('.image_item-title').first().text() || '').trim();
+				}
+
+				if (stableTitle.length) {
+					$link.attr('data-thumb-title', stableTitle);
+				}
+			}
+
+			function syncVideoThumbTitles() {
+				$(videoThumbSelector).each(function() {
+					setVideoThumbTitle($(this));
+				});
+			}
+
 			function hideEmptyPageHeaders() {
 				$('.page-header').each(function() {
 					var $header = $(this);
@@ -331,6 +352,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 				syncMobileFooterSocialIcons();
 				normalizeYouTubeGalleryLinks();
 				normalizeVimeoGalleryLinks();
+				syncVideoThumbTitles();
 				hideEmptyPageHeaders();
 				triggerTilesPrelight();
 				window.setTimeout(syncMagnificLightboxText, 0);
@@ -354,11 +376,15 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 				syncMobileFooterSocialIcons();
 				normalizeYouTubeGalleryLinks();
 				normalizeVimeoGalleryLinks();
+				syncVideoThumbTitles();
 				triggerTilesPrelight();
 				$(document)
-					.off('mfpOpen.lensChild mfpChange.lensChild click.lensChild keydown.lensChild')
+					.off('mfpOpen.lensChild mfpChange.lensChild click.lensChild keydown.lensChild mouseenter.lensChild focusin.lensChild')
 					.on('mfpOpen.lensChild mfpChange.lensChild', scheduleMagnificTextSync)
 					.on('click.lensChild', '.image__item-link, .mfp-arrow, .mfp-close', scheduleMagnificTextSync)
+					.on('mouseenter.lensChild focusin.lensChild', videoThumbSelector, function() {
+						setVideoThumbTitle($(this));
+					})
 					.on('keydown.lensChild', function(event) {
 						if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
 							scheduleMagnificTextSync();
@@ -532,7 +558,8 @@ font-weight: 300;
 </div><!-- .header -->
 <div id="main" class="content djax-updatable">
 			<div class="masonry  masonry--gallery  js-gallery  gallery-grid" data-columns="4">
-							<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+							
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
 					<a href="https://player.vimeo.com/video/675236087?h=fcea933f99" class="mfp-iframe mfp-video image__item-link" title="Mondelez | a-Bis-tinência" data-title="Mondelez | a-Bis-tinência" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 50%;">
 							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-159-4640578f-a3f3-4521-b82c-4e19e322bf4a.png" alt="Mondelez | a-Bis-tinência">
@@ -540,13 +567,15 @@ font-weight: 300;
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">Mondelez | a-Bis-tinência</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
 						</div>
 					</a>
 				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+								
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
 					<a href="https://player.vimeo.com/video/384649710" class="mfp-iframe mfp-video image__item-link" title="Nissin | E.I.T.A." data-title="Nissin | E.I.T.A." data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 50%;">
 							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-160-ffef796a-2b0e-4819-90d3-ed0bdcfc7dc2.png" alt="Nissin | E.I.T.A.">
@@ -554,13 +583,15 @@ font-weight: 300;
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">Nissin | E.I.T.A.</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
 						</div>
 					</a>
 				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+								
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
 					<a href="https://player.vimeo.com/video/774274031?h=6d9cbc24e0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" class="mfp-iframe mfp-video image__item-link" title="Cacilds - Dia dos Pais" data-title="Cacilds - Dia dos Pais" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 50%;">
 							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-161-eda4b1c2-2fa4-472d-9ee1-b5433e4964bd.png" alt="Cacilds - Dia dos Pais">
@@ -568,6 +599,7 @@ font-weight: 300;
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">Cacilds - Dia dos Pais</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
@@ -587,7 +619,8 @@ font-weight: 300;
 							</div>
 						</div>
 					</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+								
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
 					<a href="https://player.vimeo.com/video/106545210?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" class="mfp-iframe mfp-video image__item-link" title="Webmotors" data-title="Webmotors" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 50%;">
 							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-162-2a4567bb-d432-4d5c-ada9-038bf705d51f.jpg" alt="Webmotors">
@@ -595,13 +628,15 @@ font-weight: 300;
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">Webmotors</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
 						</div>
 					</a>
 				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+								
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
 					<a href="https://player.vimeo.com/video/309886095" class="mfp-iframe mfp-video image__item-link" title="HOTEIS.COM | MARCELO ADNET" data-title="HOTEIS.COM | MARCELO ADNET" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 50%;">
 							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-163-e1ab93e3-2bb9-4cf5-8db8-15b19799bf11.png" alt="HOTEIS.COM | MARCELO ADNET">
@@ -609,6 +644,7 @@ font-weight: 300;
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">HOTEIS.COM | MARCELO ADNET</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
@@ -666,7 +702,7 @@ var lens_static_resources = {"scripts":{"google-maps-api":"https://maps.google.c
 </script>
 <script id="wpgrade-main-scripts-js" src="/wp-content/themes/lens/assets/js/main.js?ver=202606271941"></script>
 <script id="pixlikes-plugin-script-js-extra">
-var locals = {"ajax_url":"/wp-admin/admin-ajax.php","ajax_nounce":"a6d169f9b6","load_likes_with_ajax":"","already_voted_msg":"You already voted!","like_on_action":"hover","hover_time":"1000","free_votes":""};
+var locals = {"ajax_url":"/wp-admin/admin-ajax.php","ajax_nounce":"d0dc2b8455","load_likes_with_ajax":"","already_voted_msg":"You already voted!","like_on_action":"hover","hover_time":"1000","free_votes":""};
 //# sourceURL=pixlikes-plugin-script-js-extra
 </script>
 <script id="pixlikes-plugin-script-js" src="/wp-content/plugins/pixlikes/js/public.js?ver=1.0.0"></script>

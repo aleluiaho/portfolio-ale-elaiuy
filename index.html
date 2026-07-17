@@ -260,6 +260,27 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 				});
 			}
 
+			var videoThumbSelector = '.gallery-grid .image__item-link[href*="player.vimeo.com"], .gallery-grid .image__item-link[href*="vimeo.com/video"], .gallery-grid .image__item-link[href*="youtube.com"], .gallery-grid .image__item-link[href*="youtu.be"]';
+
+			function setVideoThumbTitle($link) {
+				if (!$link || !$link.length) return;
+
+				var stableTitle = ($link.attr('data-thumb-title') || $link.attr('title') || $link.attr('data-title') || '').trim();
+				if (!stableTitle.length) {
+					stableTitle = ($link.find('.image_item-title').first().text() || '').trim();
+				}
+
+				if (stableTitle.length) {
+					$link.attr('data-thumb-title', stableTitle);
+				}
+			}
+
+			function syncVideoThumbTitles() {
+				$(videoThumbSelector).each(function() {
+					setVideoThumbTitle($(this));
+				});
+			}
+
 			function hideEmptyPageHeaders() {
 				$('.page-header').each(function() {
 					var $header = $(this);
@@ -331,6 +352,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 				syncMobileFooterSocialIcons();
 				normalizeYouTubeGalleryLinks();
 				normalizeVimeoGalleryLinks();
+				syncVideoThumbTitles();
 				hideEmptyPageHeaders();
 				triggerTilesPrelight();
 				window.setTimeout(syncMagnificLightboxText, 0);
@@ -354,11 +376,15 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 				syncMobileFooterSocialIcons();
 				normalizeYouTubeGalleryLinks();
 				normalizeVimeoGalleryLinks();
+				syncVideoThumbTitles();
 				triggerTilesPrelight();
 				$(document)
-					.off('mfpOpen.lensChild mfpChange.lensChild click.lensChild keydown.lensChild')
+					.off('mfpOpen.lensChild mfpChange.lensChild click.lensChild keydown.lensChild mouseenter.lensChild focusin.lensChild')
 					.on('mfpOpen.lensChild mfpChange.lensChild', scheduleMagnificTextSync)
 					.on('click.lensChild', '.image__item-link, .mfp-arrow, .mfp-close', scheduleMagnificTextSync)
+					.on('mouseenter.lensChild focusin.lensChild', videoThumbSelector, function() {
+						setVideoThumbTitle($(this));
+					})
 					.on('keydown.lensChild', function(event) {
 						if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
 							scheduleMagnificTextSync();
@@ -531,35 +557,40 @@ font-weight: 300;
 </div><!-- .header -->
 <div id="main" class="content djax-updatable">
 			<div class="masonry  masonry--gallery  js-gallery  gallery-grid" data-columns="4">
-							<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
-					<a href="https://player.vimeo.com/video/700849108?h=c875d4f059" class="mfp-iframe mfp-video image__item-link" title="O Caso Celso Daniel | Original Globoplay" data-title="O Caso Celso Daniel | Original Globoplay" data-alt="Cpation" data-effect="mfp-zoom-in" itemprop="contentURL">
+							
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+					<a href="https://player.vimeo.com/video/700849108?h=c875d4f059" class="mfp-iframe mfp-video image__item-link" title="O Caso Celso Daniel | Globoplay" data-title="O Caso Celso Daniel | Globoplay" data-alt="Série Documental Original | 8 Episódios | Produtora: Estúdio Escarlate | Direção: Marcos Jorge" data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 50%;">
-							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-107-9bb8375c-1641-488e-ac43-886b3b60eeb6.png" alt="O Caso Celso Daniel | Original Globoplay">
+							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-107-9bb8375c-1641-488e-ac43-886b3b60eeb6.png" alt="">
 						</div>
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">O Caso Celso Daniel | Globoplay</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
 						</div>
 					</a>
 				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
-					<a href="https://youtu.be/8zwIpJN8KtE" class="mfp-iframe mfp-video image__item-link" title="TNT | Sommelier" data-title="TNT | Sommelier" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
-						<div class="image__item-wrapper" style="padding-top: 55.375%;">
-							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/tnt_sommelier_30s_16x9_digital_thumb-800x443.png" alt="">
+								
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+					<a href="https://vimeo.com/805239186" class="mfp-iframe mfp-video image__item-link" title="Te amo, Se Cuida." data-title="Te amo, Se Cuida." data-alt="Criação: Faccion.cc | Produtora: Veludo | Direção: André Vidigal &amp; Liz Dórea " data-effect="mfp-zoom-in" itemprop="contentURL">
+						<div class="image__item-wrapper" style="padding-top: 50%;">
+							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-109-618ee0b5-b72f-402a-8c0b-5c302ccae354.png" alt="">
 						</div>
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">Te amo, Se Cuida.</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
 						</div>
 					</a>
 				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+								
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
 					<a href="https://player.vimeo.com/video/352328738" class="mfp-iframe mfp-video image__item-link" title="Novalgina | Colo" data-title="Novalgina | Colo" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 50%;">
 							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-165-b5a79916-14ca-4e59-bf32-ff7b69f9b736.png" alt="Novalgina | Colo">
@@ -567,57 +598,47 @@ font-weight: 300;
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">Novalgina | Colo</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
 						</div>
 					</a>
 				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
-					<a href="https://player.vimeo.com/video/624652708?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" class="mfp-iframe mfp-video image__item-link" title="Breathe" data-title="Breathe" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
+								
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+					<a href="https://player.vimeo.com/video/998848932?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" class="mfp-iframe mfp-video image__item-link" title="Fleishman | Luciana Gimenez" data-title="Fleishman | Luciana Gimenez" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 50%;">
-							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-108-557bc20a-69e6-48c9-84e4-26f7e0f2a16e.png" alt="Breathe">
+							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-117-882f5437-88f8-4193-9a65-77e7b827166e.png" alt="Fleishman | Luciana Gimenez">
 						</div>
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">Fleishman | Luciana Gimenez</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
 						</div>
 					</a>
 				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
-					<a href="https://vimeo.com/805239186" class="mfp-iframe mfp-video image__item-link" title="Te amo, Se Cuida" data-title="Te amo, Se Cuida" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
+								
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+					<a href="https://player.vimeo.com/video/624652708?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" class="mfp-iframe mfp-video image__item-link" title="Breathe" data-title="Breathe" data-alt="Produtora: Naked Films | Direção: Fernando Haddad &amp; Larissa Korolkovas" data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 50%;">
-							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-109-618ee0b5-b72f-402a-8c0b-5c302ccae354.png" alt="Te amo, Se Cuida">
+							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-108-557bc20a-69e6-48c9-84e4-26f7e0f2a16e.png" alt="">
 						</div>
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">Breathe</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
 						</div>
 					</a>
 				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
-					<a href="https://player.vimeo.com/video/210287265" class="mfp-iframe mfp-video image__item-link" title="Mandume | Emicida" data-title="Mandume | Emicida" data-alt="Label: Laboratório Fantasma
-Produtora: Rotina Filmes
-Diretora: Gabi Jacob " data-effect="mfp-zoom-in" itemprop="contentURL">
-						<div class="image__item-wrapper" style="padding-top: 49.875%;">
-							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-168-screenshot.png" alt="">
-						</div>
-						<div class="image__item-meta">
-							<div class="image_item-table">
-								<div class="image_item-cell">
-																			<i class="icon-play"></i>
-																	</div>
-							</div>
-						</div>
-					</a>
-				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
+								
+				<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
 					<a href="https://player.vimeo.com/video/104622599" class="mfp-iframe mfp-video image__item-link" title="War on Drugo | Global Commission on Drug Policies" data-title="War on Drugo | Global Commission on Drug Policies" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-wrapper" style="padding-top: 50%;">
 							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-145-030aef63-07a9-46ae-beec-4149d1fba6de.png" alt="War on Drugo | Global Commission on Drug Policies">
@@ -625,6 +646,7 @@ Diretora: Gabi Jacob " data-effect="mfp-zoom-in" itemprop="contentURL">
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
+									<div class="image_item-title">War on Drugo | Global Commission on Drug Policies</div>
 																			<i class="icon-play"></i>
 																	</div>
 							</div>
@@ -682,7 +704,7 @@ var lens_static_resources = {"scripts":{"google-maps-api":"https://maps.google.c
 </script>
 <script id="wpgrade-main-scripts-js" src="/wp-content/themes/lens/assets/js/main.js?ver=202606271941"></script>
 <script id="pixlikes-plugin-script-js-extra">
-var locals = {"ajax_url":"/wp-admin/admin-ajax.php","ajax_nounce":"a6d169f9b6","load_likes_with_ajax":"","already_voted_msg":"You already voted!","like_on_action":"hover","hover_time":"1000","free_votes":""};
+var locals = {"ajax_url":"/wp-admin/admin-ajax.php","ajax_nounce":"d0dc2b8455","load_likes_with_ajax":"","already_voted_msg":"You already voted!","like_on_action":"hover","hover_time":"1000","free_votes":""};
 //# sourceURL=pixlikes-plugin-script-js-extra
 </script>
 <script id="pixlikes-plugin-script-js" src="/wp-content/plugins/pixlikes/js/public.js?ver=1.0.0"></script>

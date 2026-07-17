@@ -242,7 +242,7 @@ body.custom-background .masonry--gallery {
   box-shadow: none;
   text-shadow: 0 0 10px rgba(255, 216, 146, 0.22);
   filter: blur(0.45px);
-  transform: translateZ(0);
+  color: #ffd892 !important;
   transition: opacity 0.2s ease, color 0.2s ease, text-shadow 0.2s ease, filter 0.2s ease;
   opacity: 0 !important;
 }
@@ -256,7 +256,7 @@ body.custom-background .masonry--gallery {
   background: transparent;
   box-shadow: none;
 }
-
+  color: #ffd892 !important;
 /* Initial 2s highlight state for ACERVO tile overlays */
 body.page-id-179.tiles-prelight .mosaic__item .image__item-meta,
 body.page-id-179.tiles-prelight .masonry__item-image .image__item-meta,
@@ -265,8 +265,8 @@ body.page-id-179.tiles-prelight .masonry__item-image .image_item-title,
 body.page-id-179.tiles-prelight .mosaic__item .image_item-description,
 body.page-id-179.tiles-prelight .masonry__item-image .image_item-description,
 body.page-id-179.tiles-prelight .mosaic__item .image_item-categories,
-body.page-id-179.tiles-prelight .masonry__item-image .image_item-categories,
-body.page-id-179.tiles-prelight .mosaic__item .image_item-categories a,
+  color: #ffd892 !important;
+  -webkit-text-fill-color: #ffd892 !important;
 body.page-id-179.tiles-prelight .masonry__item-image .image_item-categories a,
 body.page-id-179.tiles-prelight .mosaic__item .image_item-category,
 body.page-id-179.tiles-prelight .masonry__item-image .image_item-category {
@@ -357,6 +357,81 @@ body,
 /* Target gallery variant */
 .masonry--gallery .masonry__item {
   margin: 10px 0 10px 10px !important;
+}
+
+/* Video-link titles only, rendered from the link title attribute */
+.gallery-grid .image__item-link[href*="player.vimeo.com"],
+.gallery-grid .image__item-link[href*="vimeo.com/video"],
+.gallery-grid .image__item-link[href*="youtube.com"],
+.gallery-grid .image__item-link[href*="youtu.be"] {
+  position: relative;
+}
+
+.gallery-grid .image__item-link[href*="player.vimeo.com"] .image_item-title,
+.gallery-grid .image__item-link[href*="vimeo.com/video"] .image_item-title,
+.gallery-grid .image__item-link[href*="youtube.com"] .image_item-title,
+.gallery-grid .image__item-link[href*="youtu.be"] .image_item-title {
+  display: none !important;
+}
+
+.gallery-grid .image__item-link[href*="player.vimeo.com"]::after,
+.gallery-grid .image__item-link[href*="vimeo.com/video"]::after,
+.gallery-grid .image__item-link[href*="youtube.com"]::after,
+.gallery-grid .image__item-link[href*="youtu.be"]::after {
+  content: attr(data-thumb-title);
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  max-width: calc(100% - 28px);
+  margin: 0;
+  color: #ffd892;
+  font-size: 19px;
+  line-height: 1.2;
+  text-transform: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6), 0 0 10px rgba(0, 0, 0, 0.22);
+  filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.18));
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.gallery-grid .image__item-link[href*="player.vimeo.com"]:hover::after,
+.gallery-grid .image__item-link[href*="vimeo.com/video"]:hover::after,
+.gallery-grid .image__item-link[href*="youtube.com"]:hover::after,
+.gallery-grid .image__item-link[href*="youtu.be"]:hover::after,
+.gallery-grid .image__item-link[href*="player.vimeo.com"]:focus::after,
+.gallery-grid .image__item-link[href*="vimeo.com/video"]:focus::after,
+.gallery-grid .image__item-link[href*="youtube.com"]:focus::after,
+.gallery-grid .image__item-link[href*="youtu.be"]:focus::after,
+.gallery-grid .image__item-link[href*="player.vimeo.com"]:active::after,
+.gallery-grid .image__item-link[href*="vimeo.com/video"]:active::after,
+.gallery-grid .image__item-link[href*="youtube.com"]:active::after,
+.gallery-grid .image__item-link[href*="youtu.be"]:active::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ENTRETENIMENTO only: keep video-link titles always visible */
+body.page-id-92.single-lens_gallery .gallery-grid .image__item-link[href*="player.vimeo.com"]::after,
+body.page-id-92.single-lens_gallery .gallery-grid .image__item-link[href*="vimeo.com/video"]::after,
+body.page-id-92.single-lens_gallery .gallery-grid .image__item-link[href*="youtube.com"]::after,
+body.page-id-92.single-lens_gallery .gallery-grid .image__item-link[href*="youtu.be"]::after {
+  opacity: 1;
+  visibility: visible;
+  transition: none;
+}
+
+@media screen and (max-width: 899px) {
+  .gallery-grid .image__item-link[href*="player.vimeo.com"]::after,
+  .gallery-grid .image__item-link[href*="vimeo.com/video"]::after,
+  .gallery-grid .image__item-link[href*="youtube.com"]::after,
+  .gallery-grid .image__item-link[href*="youtu.be"]::after {
+    font-size: 15.84px;
+  }
 }
 
 /* Homepage gallery uses .masonry__item-image; override parent media-query spacing */
@@ -950,4 +1025,16 @@ body,
     display: none !important;
   }
 }
+
+  /* SOBRE title: match site logo gold treatment */
+  body.page-id-40 h1.entry__title {
+    color: #ffd892 !important;
+    background: linear-gradient(108deg, #fff4d8 0%, #ffd892 38%, #f0c26b 70%, #ffe8ba 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 16px rgba(255, 216, 146, 0.2);
+  }
+
+
 

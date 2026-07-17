@@ -260,6 +260,27 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 				});
 			}
 
+			var videoThumbSelector = '.gallery-grid .image__item-link[href*="player.vimeo.com"], .gallery-grid .image__item-link[href*="vimeo.com/video"], .gallery-grid .image__item-link[href*="youtube.com"], .gallery-grid .image__item-link[href*="youtu.be"]';
+
+			function setVideoThumbTitle($link) {
+				if (!$link || !$link.length) return;
+
+				var stableTitle = ($link.attr('data-thumb-title') || $link.attr('title') || $link.attr('data-title') || '').trim();
+				if (!stableTitle.length) {
+					stableTitle = ($link.find('.image_item-title').first().text() || '').trim();
+				}
+
+				if (stableTitle.length) {
+					$link.attr('data-thumb-title', stableTitle);
+				}
+			}
+
+			function syncVideoThumbTitles() {
+				$(videoThumbSelector).each(function() {
+					setVideoThumbTitle($(this));
+				});
+			}
+
 			function hideEmptyPageHeaders() {
 				$('.page-header').each(function() {
 					var $header = $(this);
@@ -331,6 +352,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 				syncMobileFooterSocialIcons();
 				normalizeYouTubeGalleryLinks();
 				normalizeVimeoGalleryLinks();
+				syncVideoThumbTitles();
 				hideEmptyPageHeaders();
 				triggerTilesPrelight();
 				window.setTimeout(syncMagnificLightboxText, 0);
@@ -354,11 +376,15 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 				syncMobileFooterSocialIcons();
 				normalizeYouTubeGalleryLinks();
 				normalizeVimeoGalleryLinks();
+				syncVideoThumbTitles();
 				triggerTilesPrelight();
 				$(document)
-					.off('mfpOpen.lensChild mfpChange.lensChild click.lensChild keydown.lensChild')
+					.off('mfpOpen.lensChild mfpChange.lensChild click.lensChild keydown.lensChild mouseenter.lensChild focusin.lensChild')
 					.on('mfpOpen.lensChild mfpChange.lensChild', scheduleMagnificTextSync)
 					.on('click.lensChild', '.image__item-link, .mfp-arrow, .mfp-close', scheduleMagnificTextSync)
+					.on('mouseenter.lensChild focusin.lensChild', videoThumbSelector, function() {
+						setVideoThumbTitle($(this));
+					})
 					.on('keydown.lensChild', function(event) {
 						if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
 							scheduleMagnificTextSync();
@@ -470,7 +496,7 @@ font-weight: 300;
 			
 </head>
 
-<body class="wp-singular lens_gallery-template-default single single-lens_gallery postid-106 wp-theme-lens wp-child-theme-lens-child single-gallery-masonry-plus is--copyright-protected " data-ajaxloading data-smoothscrolling>
+<body class="wp-singular lens_gallery-template-default single single-lens_gallery postid-106 wp-theme-lens wp-child-theme-lens-child single-gallery-masonry is--copyright-protected " data-ajaxloading data-smoothscrolling>
 <div class="pace">
 	<div class="pace-activity"></div>
 </div>
@@ -531,11 +557,25 @@ font-weight: 300;
     </footer><!-- #colophon -->
 </div><!-- .header -->
 <div id="main" class="content djax-updatable">
-			<div class="masonry  masonry--gallery  js-gallery  gallery-grid" data-columns="4">
-							<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
-					<a href="https://player.vimeo.com/video/700849108?h=c875d4f059" class="mfp-iframe mfp-video image__item-link" title="O Caso Celso Daniel | Original Globoplay" data-title="O Caso Celso Daniel | Original Globoplay" data-alt="Cpation" data-effect="mfp-zoom-in" itemprop="contentURL">
-						<div class="image__item-wrapper" style="padding-top: 50%;">
-							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-107-9bb8375c-1641-488e-ac43-886b3b60eeb6.png" alt="O Caso Celso Daniel | Original Globoplay">
+			<div class="mosaic gallery js-gallery  gallery-grid">
+
+							<div class="mosaic__item  js--is-loaded mosaic__item--page-title-mobile">
+					<div class="image__item-link">
+						<div class="image__item-wrapper">
+													</div>
+						<div class="image__item-meta">
+							<div class="image_item-table">
+								<div class="image_item-cell">
+									<h1 itemprop="headline">ENTRETENIMENTO</h1>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+							<div class="mosaic__item magnific-link " itemscope itemtype="http://schema.org/ImageObject">
+					<a href="https://player.vimeo.com/video/700849108?h=c875d4f059" class="mfp-iframe mfp-video image__item-link" title="O Caso Celso Daniel | Globoplay" data-title="O Caso Celso Daniel | Globoplay" data-alt="Série Documental Original | 8 Episódios | Produtora: Estúdio Escarlate | Direção: Marcos Jorge" data-effect="mfp-zoom-in" itemprop="contentURL">
+						<div class="image__item-wrapper">
+							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-107-9bb8375c-1641-488e-ac43-886b3b60eeb6.png" alt="">
 						</div>
 						<div class="image__item-meta">
 							<div class="image_item-table">
@@ -546,51 +586,163 @@ font-weight: 300;
 						</div>
 					</a>
 				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
-					<a href="https://player.vimeo.com/video/624652708?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" class="mfp-iframe mfp-video image__item-link" title="Breathe" data-title="Breathe" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
-						<div class="image__item-wrapper" style="padding-top: 50%;">
-							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-108-557bc20a-69e6-48c9-84e4-26f7e0f2a16e.png" alt="Breathe">
+								<div class="mosaic__item magnific-link " itemscope itemtype="http://schema.org/ImageObject">
+					<a href="/wp-content/uploads/2026/07/occd-10.png" class="mfp-image image__item-link" title="O Caso Celso Daniel | Globoplay" data-title="O Caso Celso Daniel | Globoplay" data-alt="Série Documental Original | 8 Episódios | Produtora: Estúdio Escarlate | Direção: Marcos Jorge" data-effect="mfp-zoom-in" itemprop="contentURL">
+						<div class="image__item-wrapper">
+							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/occd-10-800x440.png" alt="">
 						</div>
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
-																			<i class="icon-play"></i>
+																			<div class="image__plus-icon">+</div>
 																	</div>
 							</div>
 						</div>
 					</a>
 				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
-					<a href="https://vimeo.com/805239186" class="mfp-iframe mfp-video image__item-link" title="Te amo, Se Cuida" data-title="Te amo, Se Cuida" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
-						<div class="image__item-wrapper" style="padding-top: 50%;">
-							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-109-618ee0b5-b72f-402a-8c0b-5c302ccae354.png" alt="Te amo, Se Cuida">
+								<div class="mosaic__item magnific-link " itemscope itemtype="http://schema.org/ImageObject">
+					<a href="/wp-content/uploads/2026/07/occd-09.png" class="mfp-image image__item-link" title="O Caso Celso Daniel | Globoplay" data-title="O Caso Celso Daniel | Globoplay" data-alt="Série Documental Original | 8 Episódios | Produtora: Estúdio Escarlate | Direção: Marcos Jorge" data-effect="mfp-zoom-in" itemprop="contentURL">
+						<div class="image__item-wrapper">
+							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/occd-09-800x440.png" alt="">
 						</div>
 						<div class="image__item-meta">
 							<div class="image_item-table">
 								<div class="image_item-cell">
-																			<i class="icon-play"></i>
+																			<div class="image__plus-icon">+</div>
 																	</div>
 							</div>
 						</div>
 					</a>
 				</div>
-									<div class="masonry__item-image  mosaic__item  js--is-loaded mosaic__item--page-title">
+									<div class="mosaic__item js--is-loaded mosaic__item--page-title">
 						<div class="image__item-link">
 							<div class="image__item-wrapper">
 															</div>
 							<div class="image__item-meta">
 								<div class="image_item-table">
 									<div class="image_item-cell">
-										<h1 itemprop="headline">ENTRETENIMENTO</h1>
+										<h1>ENTRETENIMENTO</h1>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
-					<a href="https://player.vimeo.com/video/338912994" class="mfp-iframe mfp-video image__item-link" title="MoonHeist | See Things Differently" data-title="MoonHeist | See Things Differently" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
-						<div class="image__item-wrapper" style="padding-top: 50%;">
-							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-110-dd7b0df5-490a-4cbf-a6c0-d6f3dc77a8fd.png" alt="MoonHeist | See Things Differently">
+								<div class="mosaic__item magnific-link " itemscope itemtype="http://schema.org/ImageObject">
+					<a href="/wp-content/uploads/2026/07/occd-08.png" class="mfp-image image__item-link" title="O Caso Celso Daniel | Globoplay" data-title="O Caso Celso Daniel | Globoplay" data-alt="Série Documental Original | 8 Episódios | Produtora: Estúdio Escarlate | Direção: Marcos Jorge" data-effect="mfp-zoom-in" itemprop="contentURL">
+						<div class="image__item-wrapper">
+							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/occd-08-800x440.png" alt="">
+						</div>
+						<div class="image__item-meta">
+							<div class="image_item-table">
+								<div class="image_item-cell">
+																			<div class="image__plus-icon">+</div>
+																	</div>
+							</div>
+						</div>
+					</a>
+				</div>
+								<div class="mosaic__item magnific-link " itemscope itemtype="http://schema.org/ImageObject">
+					<a href="/wp-content/uploads/2026/07/occd-07.png" class="mfp-image image__item-link" title="O Caso Celso Daniel | Globoplay" data-title="O Caso Celso Daniel | Globoplay" data-alt="Série Documental Original | 8 Episódios | Produtora: Estúdio Escarlate | Direção: Marcos Jorge" data-effect="mfp-zoom-in" itemprop="contentURL">
+						<div class="image__item-wrapper">
+							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/occd-07-800x440.png" alt="">
+						</div>
+						<div class="image__item-meta">
+							<div class="image_item-table">
+								<div class="image_item-cell">
+																			<div class="image__plus-icon">+</div>
+																	</div>
+							</div>
+						</div>
+					</a>
+				</div>
+								<div class="mosaic__item magnific-link " itemscope itemtype="http://schema.org/ImageObject">
+					<a href="/wp-content/uploads/2026/07/occd-06.png" class="mfp-image image__item-link" title="O Caso Celso Daniel | Globoplay" data-title="O Caso Celso Daniel | Globoplay" data-alt="Série Documental Original | 8 Episódios | Produtora: Estúdio Escarlate | Direção: Marcos Jorge" data-effect="mfp-zoom-in" itemprop="contentURL">
+						<div class="image__item-wrapper">
+							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/occd-06-800x440.png" alt="">
+						</div>
+						<div class="image__item-meta">
+							<div class="image_item-table">
+								<div class="image_item-cell">
+																			<div class="image__plus-icon">+</div>
+																	</div>
+							</div>
+						</div>
+					</a>
+				</div>
+								<div class="mosaic__item magnific-link " itemscope itemtype="http://schema.org/ImageObject">
+					<a href="/wp-content/uploads/2026/07/occd-05.png" class="mfp-image image__item-link" title="O Caso Celso Daniel | Globoplay" data-title="O Caso Celso Daniel | Globoplay" data-alt="Série Documental Original | 8 Episódios | Produtora: Estúdio Escarlate | Direção: Marcos Jorge" data-effect="mfp-zoom-in" itemprop="contentURL">
+						<div class="image__item-wrapper">
+							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/occd-05-800x440.png" alt="">
+						</div>
+						<div class="image__item-meta">
+							<div class="image_item-table">
+								<div class="image_item-cell">
+																			<div class="image__plus-icon">+</div>
+																	</div>
+							</div>
+						</div>
+					</a>
+				</div>
+								<div class="mosaic__item magnific-link " itemscope itemtype="http://schema.org/ImageObject">
+					<a href="/wp-content/uploads/2026/07/occd-04.png" class="mfp-image image__item-link" title="O Caso Celso Daniel | Globoplay" data-title="O Caso Celso Daniel | Globoplay" data-alt="Série Documental Original | 8 Episódios | Produtora: Estúdio Escarlate | Direção: Marcos Jorge" data-effect="mfp-zoom-in" itemprop="contentURL">
+						<div class="image__item-wrapper">
+							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/occd-04-800x440.png" alt="">
+						</div>
+						<div class="image__item-meta">
+							<div class="image_item-table">
+								<div class="image_item-cell">
+																			<div class="image__plus-icon">+</div>
+																	</div>
+							</div>
+						</div>
+					</a>
+				</div>
+								<div class="mosaic__item magnific-link " itemscope itemtype="http://schema.org/ImageObject">
+					<a href="/wp-content/uploads/2026/07/occd-03.png" class="mfp-image image__item-link" title="O Caso Celso Daniel | Globoplay" data-title="O Caso Celso Daniel | Globoplay" data-alt="Série Documental Original | 8 Episódios | Produtora: Estúdio Escarlate | Direção: Marcos Jorge" data-effect="mfp-zoom-in" itemprop="contentURL">
+						<div class="image__item-wrapper">
+							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/occd-03-800x440.png" alt="">
+						</div>
+						<div class="image__item-meta">
+							<div class="image_item-table">
+								<div class="image_item-cell">
+																			<div class="image__plus-icon">+</div>
+																	</div>
+							</div>
+						</div>
+					</a>
+				</div>
+								<div class="mosaic__item magnific-link " itemscope itemtype="http://schema.org/ImageObject">
+					<a href="/wp-content/uploads/2026/07/occd-02.png" class="mfp-image image__item-link" title="O Caso Celso Daniel | Globoplay" data-title="O Caso Celso Daniel | Globoplay" data-alt="Série Documental Original | 8 Episódios | Produtora: Estúdio Escarlate | Direção: Marcos Jorge" data-effect="mfp-zoom-in" itemprop="contentURL">
+						<div class="image__item-wrapper">
+							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/occd-02-800x440.png" alt="">
+						</div>
+						<div class="image__item-meta">
+							<div class="image_item-table">
+								<div class="image_item-cell">
+																			<div class="image__plus-icon">+</div>
+																	</div>
+							</div>
+						</div>
+					</a>
+				</div>
+								<div class="mosaic__item magnific-link " itemscope itemtype="http://schema.org/ImageObject">
+					<a href="/wp-content/uploads/2026/07/occd-01.png" class="mfp-image image__item-link" title="O Caso Celso Daniel | Globoplay" data-title="O Caso Celso Daniel | Globoplay" data-alt="Série Documental Original | 8 Episódios | Produtora: Estúdio Escarlate | Direção: Marcos Jorge" data-effect="mfp-zoom-in" itemprop="contentURL">
+						<div class="image__item-wrapper">
+							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/occd-01.png" alt="">
+						</div>
+						<div class="image__item-meta">
+							<div class="image_item-table">
+								<div class="image_item-cell">
+																			<div class="image__plus-icon">+</div>
+																	</div>
+							</div>
+						</div>
+					</a>
+				</div>
+								<div class="mosaic__item magnific-link " itemscope itemtype="http://schema.org/ImageObject">
+					<a href="https://player.vimeo.com/video/254137780" class="mfp-iframe mfp-video image__item-link" title="Eu Te Dedico | Arte 1" data-title="Eu Te Dedico | Arte 1" data-alt="Série Documental Original | 6 Episódios | Produtora: Academia de Filmes | Direção: Fernanda Weinfeld | Produtora Executiva: Clara Guimarães" data-effect="mfp-zoom-in" itemprop="contentURL">
+						<div class="image__item-wrapper">
+							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-114-085d56c1-bb75-4ab3-8ccc-e2fd2e8e7b09.png" alt="">
 						</div>
 						<div class="image__item-meta">
 							<div class="image_item-table">
@@ -601,66 +753,10 @@ font-weight: 300;
 						</div>
 					</a>
 				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
-					<a href="https://vimeo.com/424264445" class="mfp-iframe mfp-video image__item-link" title="Curta | O Náutico" data-title="Curta | O Náutico" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
-						<div class="image__item-wrapper" style="padding-top: 50%;">
-							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-111-fe518e12-7613-46ec-835d-d22a1871b407.jpg" alt="Curta | O Náutico">
-						</div>
-						<div class="image__item-meta">
-							<div class="image_item-table">
-								<div class="image_item-cell">
-																			<i class="icon-play"></i>
-																	</div>
-							</div>
-						</div>
-					</a>
-				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
-					<a href="https://player.vimeo.com/video/306442343" class="mfp-iframe mfp-video image__item-link" title="Cultura | Teaser Parintins" data-title="Cultura | Teaser Parintins" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
-						<div class="image__item-wrapper" style="padding-top: 50%;">
-							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-112-add9b47a-b611-44c1-a5bc-8d553e778af3.png" alt="Cultura | Teaser Parintins">
-						</div>
-						<div class="image__item-meta">
-							<div class="image_item-table">
-								<div class="image_item-cell">
-																			<i class="icon-play"></i>
-																	</div>
-							</div>
-						</div>
-					</a>
-				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
-					<a href="https://player.vimeo.com/video/422928421" class="mfp-iframe mfp-video image__item-link" title="Curta | Tenha Um Ótimo Dia" data-title="Curta | Tenha Um Ótimo Dia" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
-						<div class="image__item-wrapper" style="padding-top: 50%;">
-							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-113-a6e52f20-19e3-48b5-8cff-04929adb8ac6.png" alt="Curta | Tenha Um Ótimo Dia">
-						</div>
-						<div class="image__item-meta">
-							<div class="image_item-table">
-								<div class="image_item-cell">
-																			<i class="icon-play"></i>
-																	</div>
-							</div>
-						</div>
-					</a>
-				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
-					<a href="https://player.vimeo.com/video/254137780" class="mfp-iframe mfp-video image__item-link" title="Eu Te Dedico SÉRIE DOCUMENTAL | 6 EPISÓDIOS | ARTE 1" data-title="Eu Te Dedico SÉRIE DOCUMENTAL | 6 EPISÓDIOS | ARTE 1" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
-						<div class="image__item-wrapper" style="padding-top: 50%;">
-							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-114-085d56c1-bb75-4ab3-8ccc-e2fd2e8e7b09.png" alt="Eu Te Dedico SÉRIE DOCUMENTAL | 6 EPISÓDIOS | ARTE 1">
-						</div>
-						<div class="image__item-meta">
-							<div class="image_item-table">
-								<div class="image_item-cell">
-																			<i class="icon-play"></i>
-																	</div>
-							</div>
-						</div>
-					</a>
-				</div>
-								<div class="masonry__item-image  mosaic__item  magnific-link" itemscope itemtype="http://schema.org/ImageObject">
-					<a href="https://player.vimeo.com/video/192179008" class="mfp-iframe mfp-video image__item-link" title="Curta | Felizes para Sempre" data-title="Curta | Felizes para Sempre" data-alt="" data-effect="mfp-zoom-in" itemprop="contentURL">
-						<div class="image__item-wrapper" style="padding-top: 50%;">
-							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-115-70809821-f71b-414b-82b5-787ffc7fa6e6.png" alt="Curta | Felizes para Sempre">
+								<div class="mosaic__item magnific-link " itemscope itemtype="http://schema.org/ImageObject">
+					<a href="https://player.vimeo.com/video/306442343" class="mfp-iframe mfp-video image__item-link" title="Teaser Parintins | Tv Cultura" data-title="Teaser Parintins | Tv Cultura" data-alt="Direção: Diogo Gameiro" data-effect="mfp-zoom-in" itemprop="contentURL">
+						<div class="image__item-wrapper">
+							<img class="js-lazy-load" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/wp-content/uploads/2026/07/gallery-112-add9b47a-b611-44c1-a5bc-8d553e778af3.png" alt="">
 						</div>
 						<div class="image__item-meta">
 							<div class="image_item-table">
@@ -722,7 +818,7 @@ var lens_static_resources = {"scripts":{"google-maps-api":"https://maps.google.c
 </script>
 <script id="wpgrade-main-scripts-js" src="/wp-content/themes/lens/assets/js/main.js?ver=202606271941"></script>
 <script id="pixlikes-plugin-script-js-extra">
-var locals = {"ajax_url":"/wp-admin/admin-ajax.php","ajax_nounce":"a6d169f9b6","load_likes_with_ajax":"","already_voted_msg":"You already voted!","like_on_action":"hover","hover_time":"1000","free_votes":""};
+var locals = {"ajax_url":"/wp-admin/admin-ajax.php","ajax_nounce":"d0dc2b8455","load_likes_with_ajax":"","already_voted_msg":"You already voted!","like_on_action":"hover","hover_time":"1000","free_votes":""};
 //# sourceURL=pixlikes-plugin-script-js-extra
 </script>
 <script id="pixlikes-plugin-script-js" src="/wp-content/plugins/pixlikes/js/public.js?ver=1.0.0"></script>
