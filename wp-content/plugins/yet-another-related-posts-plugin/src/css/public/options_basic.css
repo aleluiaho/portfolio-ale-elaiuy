@@ -44,7 +44,7 @@ ul.yarpp_contacts li a img {
   position: absolute;
   margin-left: -29px;
   margin-top: -1px;
-  background-image: url('/portfolio-ale-elaiuy/wp-content/plugins/yet-another-related-posts-plugin/src/css/images/sprites.png');
+  background-image: url('/wp-content/plugins/yet-another-related-posts-plugin/src/css/images/sprites.png');
 }
 
 body.rtl .icon {
@@ -54,7 +54,7 @@ body.rtl .icon {
 
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5) {
   .icon {
-    background-image: url('/portfolio-ale-elaiuy/wp-content/plugins/yet-another-related-posts-plugin/src/css/images/sprites-2x.png');
+    background-image: url('/wp-content/plugins/yet-another-related-posts-plugin/src/css/images/sprites-2x.png');
     background-size: 132px 22px;
   }
 }
@@ -365,7 +365,7 @@ body.rtl #yarpp-optin-learnmore {
 .yarpp_template_button > div.image {
   width: 70px;
   height: 40px;
-  background-image: url('/portfolio-ale-elaiuy/wp-content/plugins/yet-another-related-posts-plugin/src/css/images/template-buttons-2x.png');
+  background-image: url('/wp-content/plugins/yet-another-related-posts-plugin/src/css/images/template-buttons-2x.png');
   background-size: 210px 40px;
   opacity: 0.8;
 }

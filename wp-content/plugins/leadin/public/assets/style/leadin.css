@@ -3,18 +3,18 @@
 /* For sprocket icon on WordPress admin menu */
 @font-face {
   font-family: 'hs-font';
-  src: url('/portfolio-ale-elaiuy/wp-content/plugins/leadin/public/assets/style/fonts/hs-font.woff') format('woff'),
-    url('/portfolio-ale-elaiuy/wp-content/plugins/leadin/public/assets/style/fonts/hs-font.svg#hs-font') format('svg');
+  src: url('/wp-content/plugins/leadin/public/assets/style/fonts/hs-font.woff') format('woff'),
+    url('/wp-content/plugins/leadin/public/assets/style/fonts/hs-font.svg#hs-font') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Lexend Deca';
-  src: url('/portfolio-ale-elaiuy/wp-content/plugins/leadin/public/assets/style/fonts/LexendDeca-Light.woff2') format('woff2'),
-    url('/portfolio-ale-elaiuy/wp-content/plugins/leadin/public/assets/style/fonts/LexendDeca-Medium.woff2') format('woff2'),
-    url('/portfolio-ale-elaiuy/wp-content/plugins/leadin/public/assets/style/fonts/LexendDeca-SemiBold.woff2') format('woff2'),
-    url('/portfolio-ale-elaiuy/wp-content/plugins/leadin/public/assets/style/fonts/LexendDeca-Bold.woff2') format('woff2');
+  src: url('/wp-content/plugins/leadin/public/assets/style/fonts/LexendDeca-Light.woff2') format('woff2'),
+    url('/wp-content/plugins/leadin/public/assets/style/fonts/LexendDeca-Medium.woff2') format('woff2'),
+    url('/wp-content/plugins/leadin/public/assets/style/fonts/LexendDeca-SemiBold.woff2') format('woff2'),
+    url('/wp-content/plugins/leadin/public/assets/style/fonts/LexendDeca-Bold.woff2') format('woff2');
 }
 
 #wp-admin-bar-leadin-admin-menu .ab-icon:before,
@@ -251,8 +251,8 @@
 
 #toplevel_page_leadin .external_link::after {
   content: '';
-  -webkit-mask: url('/portfolio-ale-elaiuy/wp-content/plugins/leadin/public/assets/images/external_link.svg') no-repeat 50% 50%;
-  mask: url('/portfolio-ale-elaiuy/wp-content/plugins/leadin/public/assets/images/external_link.svg') no-repeat 50% 50%;
+  -webkit-mask: url('/wp-content/plugins/leadin/public/assets/images/external_link.svg') no-repeat 50% 50%;
+  mask: url('/wp-content/plugins/leadin/public/assets/images/external_link.svg') no-repeat 50% 50%;
   -webkit-mask-size: cover;
   mask-size: cover;
   position: absolute;
@@ -294,7 +294,7 @@
 }
 
 .hubspot-widget-empty {
-  background-image: url('/portfolio-ale-elaiuy/wp-content/plugins/leadin/public/assets/images/hubspot.svg');
+  background-image: url('/wp-content/plugins/leadin/public/assets/images/hubspot.svg');
   background-color: #f5f8fa;
   background-repeat: no-repeat;
   background-position: center 25px;

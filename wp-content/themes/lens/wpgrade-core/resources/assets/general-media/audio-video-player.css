@@ -112,7 +112,7 @@ article.format-video .video-wrap iframe,
 	height: 100px;
 	margin: -50px 0 0 -50px;
 	z-index: 1;
-	background: url("/portfolio-ale-elaiuy/wp-content/themes/lens/wpgrade-core/resources/assets/general-media/images/bigplay.png") no-repeat;
+	background: url("/wp-content/themes/lens/wpgrade-core/resources/assets/general-media/images/bigplay.png") no-repeat;
 }
 
 .mejs-overlay:hover .mejs-overlay-button {
@@ -132,7 +132,7 @@ article.format-video .video-wrap iframe,
 	display: block;
 	width: 70px;
 	height: 70px;
-	background: transparent url("/portfolio-ale-elaiuy/wp-content/themes/lens/wpgrade-core/resources/assets/general-media/images/loading.gif") 50% 50% no-repeat;
+	background: transparent url("/wp-content/themes/lens/wpgrade-core/resources/assets/general-media/images/loading.gif") 50% 50% no-repeat;
 	-moz-border-radius: 120px;
 	-ms-border-radius: 120px;
 	-webkit-border-radius: 120px;
@@ -151,7 +151,7 @@ article.format-video .video-wrap iframe,
 	left: 0;
 	height: 30px;
 	width: 100%;
-	background: #3a3c3d url("/portfolio-ale-elaiuy/wp-content/themes/lens/wpgrade-core/resources/assets/general-media/images/background.png");
+	background: #3a3c3d url("/wp-content/themes/lens/wpgrade-core/resources/assets/general-media/images/background.png");
 	background: -webkit-linear-gradient(#4a4c4d, #2b2d2d);
 	background: -moz-linear-gradient(#4a4c4d, #2b2d2d);
 	background: -o-linear-gradient(#4a4c4d, #2b2d2d);
@@ -175,7 +175,7 @@ article.format-video .video-wrap iframe,
 	font-size: 11px;
 	line-height: 11px;
 	font-family: sans-serif;
-	background: url("/portfolio-ale-elaiuy/wp-content/themes/lens/wpgrade-core/resources/assets/general-media/images/sep.png") left no-repeat;
+	background: url("/wp-content/themes/lens/wpgrade-core/resources/assets/general-media/images/sep.png") left no-repeat;
 	border: 0;
 }
 
@@ -191,7 +191,7 @@ article.format-video .video-wrap iframe,
 	height: 16px;
 	width: 16px;
 	border: 0;
-	background: transparent url("/portfolio-ale-elaiuy/wp-content/themes/lens/wpgrade-core/resources/assets/general-media/images/controls.png") no-repeat;
+	background: transparent url("/wp-content/themes/lens/wpgrade-core/resources/assets/general-media/images/controls.png") no-repeat;
 }
 
 /* :focus for accessibility */
