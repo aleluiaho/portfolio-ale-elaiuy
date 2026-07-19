@@ -95,7 +95,7 @@ body.page-id-40 .sobre-segunda-dobra::before {
 
 /* Make the website background image fill the viewport and stay centered */
 html {
-  background-image: url('/wp-content/uploads/2026/06/79610039_i.jpg');
+  background-image: url('https://aleelaiuy.com/wp-content/uploads/2026/06/79610039_i.jpg');
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -235,13 +235,13 @@ body.custom-background .masonry--gallery {
   width: auto;
   height: auto;
   border-radius: 0;
-  color: rgba(255, 216, 146, 0.6) !important;
+  color: #ffd892 !important;
   background: transparent;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
   box-shadow: none;
   text-shadow: 0 0 10px rgba(255, 216, 146, 0.22);
-  filter: blur(0.45px);
+  filter: none;
   color: #ffd892 !important;
   transition: opacity 0.2s ease, color 0.2s ease, text-shadow 0.2s ease, filter 0.2s ease;
   opacity: 0 !important;
@@ -249,9 +249,9 @@ body.custom-background .masonry--gallery {
 
 .mosaic__item .image__item-link:hover .icon-play,
 .masonry__item-image .image__item-link:hover .icon-play {
-  color: rgba(255, 216, 146, 0.75) !important;
+  color: #ffd892 !important;
   text-shadow: 0 0 12px rgba(255, 216, 146, 0.3);
-  filter: blur(0.3px);
+  filter: none;
   opacity: 1 !important;
   background: transparent;
   box-shadow: none;
