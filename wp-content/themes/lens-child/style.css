@@ -256,7 +256,7 @@ body.custom-background .masonry--gallery {
   background: transparent;
   box-shadow: none;
 }
-  color: #ffd892 !important;
+
 /* Initial 2s highlight state for ACERVO tile overlays */
 body.page-id-179.tiles-prelight .mosaic__item .image__item-meta,
 body.page-id-179.tiles-prelight .masonry__item-image .image__item-meta,
@@ -265,11 +265,13 @@ body.page-id-179.tiles-prelight .masonry__item-image .image_item-title,
 body.page-id-179.tiles-prelight .mosaic__item .image_item-description,
 body.page-id-179.tiles-prelight .masonry__item-image .image_item-description,
 body.page-id-179.tiles-prelight .mosaic__item .image_item-categories,
-  color: #ffd892 !important;
-  -webkit-text-fill-color: #ffd892 !important;
+body.page-id-179.tiles-prelight .masonry__item-image .image_item-categories,
+body.page-id-179.tiles-prelight .mosaic__item .image_item-categories a,
 body.page-id-179.tiles-prelight .masonry__item-image .image_item-categories a,
 body.page-id-179.tiles-prelight .mosaic__item .image_item-category,
 body.page-id-179.tiles-prelight .masonry__item-image .image_item-category {
+  color: #ffd892 !important;
+  -webkit-text-fill-color: #ffd892 !important;
   opacity: 1 !important;
   visibility: visible !important;
   text-shadow: 0 0 10px rgba(255, 216, 146, 0.28);
